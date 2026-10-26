@@ -112,7 +112,7 @@ func (c *Client) do(ctx context.Context, method, u string) (body []byte, retry b
 		return nil, true, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, resp.StatusCode >= 500, fmt.Errorf("%s %s: HTTP %d", method, u, resp.StatusCode)
+		return nil, resp.StatusCode >= 500 || resp.StatusCode == http.StatusTooManyRequests, fmt.Errorf("%s %s: HTTP %d", method, u, resp.StatusCode)
 	}
 	return body, false, nil
 }

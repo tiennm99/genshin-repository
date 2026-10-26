@@ -51,8 +51,8 @@ func Sync(ctx context.Context, c *Client, s *store.Store, o Options) error {
 	if err != nil {
 		return err
 	}
-	if br.Main == nil {
-		return fmt.Errorf("getGameBranches: no main branch")
+	if br.Main == nil || br.Main.Tag == "" {
+		return fmt.Errorf("getGameBranches: no main branch tag")
 	}
 	if err := syncBranch(ctx, c, s, br.Main, false, o.Date, logf); err != nil {
 		return err

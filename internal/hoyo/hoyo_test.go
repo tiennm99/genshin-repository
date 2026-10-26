@@ -245,3 +245,42 @@ func TestCandidateTags(t *testing.T) {
 		t.Errorf("got %v, want %v", got, want)
 	}
 }
+
+func TestSyncRejectsEmptyMainTag(t *testing.T) {
+	var br map[string]any
+	if err := json.Unmarshal(fixture(t, "get_game_branches.json"), &br); err != nil {
+		t.Fatal(err)
+	}
+	gb := br["data"].(map[string]any)["game_branches"].([]any)[0].(map[string]any)
+	gb["main"].(map[string]any)["tag"] = ""
+	raw, _ := json.Marshal(br)
+	s := &store.Store{}
+	if err := Sync(context.Background(), fakeAPI(t, raw), s, Options{Date: "2026-11-01"}); err == nil {
+		t.Fatal("empty main tag accepted")
+	}
+	for _, v := range s.Versions {
+		if v.Sophon != nil || v.MainFirstSeen != "" {
+			t.Errorf("empty main tag stored %+v", v)
+		}
+	}
+}
+
+func TestRetryableStatus(t *testing.T) {
+	for status, want := range map[int]bool{
+		http.StatusTooManyRequests:     true,
+		http.StatusBadGateway:          true,
+		http.StatusBadRequest:          false,
+		http.StatusNotFound:            false,
+		http.StatusInternalServerError: true,
+	} {
+		srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+			w.WriteHeader(status)
+		}))
+		c := &Client{HTTP: srv.Client()}
+		_, retry, err := c.do(context.Background(), http.MethodGet, srv.URL)
+		srv.Close()
+		if err == nil || retry != want {
+			t.Errorf("HTTP %d: retry %v, err %v", status, retry, err)
+		}
+	}
+}
