@@ -39,9 +39,10 @@ HoYoverse published these versions as zip archives. Each version below has:
 - **Full install:** the game archive, split into numbered parts
   (`.zip.001`, `.zip.002`, ...) for newer versions, plus one archive per
   voice-over language.
-- **Update from X (pre-install):** smaller archives that update an
-  existing install of version X. They hold hdiff patch files that a
-  launcher or patch tool applies to the old files, not a full game.
+- **Update from X:** smaller archives that update an existing install of
+  version X. They hold hdiff patch files that a launcher or patch tool
+  applies to the old files, not a full game. The upstream lists call
+  them pre-install files.
 
 Steps for a full install:
 
@@ -49,12 +50,22 @@ Steps for a full install:
    JDownloader, or `aria2c -x 16 -s 16 <url>`). Download every game part and
    the voice-over packs you want into one folder.
 2. Check each file against the MD5 in the table: `certutil -hashfile <file> MD5`
-   on Windows, `md5sum <file>` on Linux and macOS.
+   on Windows, `md5sum <file>` on Linux and macOS. Where the table says the
+   MD5 was published for another size, the served file changed after the
+   API listed it, and its MD5 is unknown.
 3. Extract the game archive. For a split archive, open the `.zip.001` file
    with 7-Zip, which joins the parts. Extract the voice-over packs into the
    same folder.
 
 Some old archives are no longer served; they are marked as dead links.
+
+### Single files: ScatteredFiles
+
+Releases that list a scattered-files URL (`res_list_url`) offer one more
+route. Below that URL, `pkg_version` is a JSON-lines list of every game
+file (`remoteName`, `md5`, `fileSize`). Each file can be downloaded on its own from
+`<res_list_url>/<remoteName>`, which helps to repair a single file without
+the full archive. HoYoverse may remove these URLs at any time.
 
 ## How to download 5.6 and later
 
@@ -63,9 +74,12 @@ HoYoverse stopped publishing full-game and patch zip archives after
 through **Sophon**. In Sophon the game is split into small compressed
 chunks, and a manifest lists them. Downloaders fetch the manifest and the
 chunks, then rebuild the game files on your disk. There are no direct
-download links to share for 5.6 and later. Each version entry below instead
-lists the Sophon manifests, the chunk URL prefix, the sizes and the diff
-tags. Any Sophon-aware tool below can use them.
+download links to share for 5.6 and later. The launchers below install the
+current version from the API. Each version entry below lists the Sophon
+manifests, the chunk URL prefix, the sizes and the diff tags. They are for
+reference and for tools or scripts that rebuild files from a Sophon
+manifest. This repository does not claim that older builds can be installed
+with these launchers.
 
 ### Official route: HoYoPlay (Windows)
 
@@ -139,14 +153,9 @@ a launcher. It covers `hk4e_global`, including full builds and patch builds.
 - **Sophon update ... (from X):** diff data that updates an install of
   version X (the diff tags). The Sophon API serves update data for the
   current version only, so older versions list the full build alone.
-
-### Single files: ScatteredFiles
-
-Each zip-era release also has a scattered-files URL (`res_list_url`). Below
-it, `pkg_version` is a JSON-lines list of every game file (`remoteName`,
-`md5`, `fileSize`). Each file can be downloaded on its own from
-`<res_list_url>/<remoteName>`, which helps to repair a single file without
-the full archive. HoYoverse may remove these URLs at any time.
+- The Sophon API also answers for several zip-era 4.x and 5.x versions.
+  This list records Sophon builds from 5.6.0 on, where Sophon is the only
+  way to download.
 
 > The tools above are independent community projects. HoYoverse does not
 > endorse them, and this repository has no ties to them. Third-party
@@ -161,6 +170,8 @@ version was seen in the API: up to 5.5.0 from the upstream daily snapshots, and 
 
 <details>
 <summary><b>Version 7.x</b>: 7.0.0 to 7.1.0 (2 versions)</summary>
+
+Jump to: [7.1.0](#710-live) · [7.0.0](#700)
 
 ### 7.1.0 (live)
 
@@ -210,6 +221,8 @@ Only the full build is recorded: the Sophon API serves update data for the curre
 
 <details>
 <summary><b>Version 6.x</b>: 6.0.0 to 6.7.0 (8 versions)</summary>
+
+Jump to: [6.7.0](#670) · [6.6.0](#660) · [6.5.0](#650) · [6.4.0](#640) · [6.3.0](#630) · [6.2.0](#620) · [6.1.0](#610) · [6.0.0](#600)
 
 ### 6.7.0
 
@@ -344,6 +357,8 @@ Only the full build is recorded: the Sophon API serves update data for the curre
 <details>
 <summary><b>Version 5.x</b>: 5.0.0 to 5.8.0 (9 versions)</summary>
 
+Jump to: [5.8.0](#580) · [5.7.0](#570) · [5.6.0](#560) · [5.5.0](#550) · [5.4.0](#540) · [5.3.0](#530) · [5.2.0](#520) · [5.1.0](#510) · [5.0.0](#500)
+
 ### 5.8.0
 
 #### Sophon full build `d6lo39gA1LIA`
@@ -415,7 +430,7 @@ Seen in the API as the live version from 2025-03-26 to 2025-05-06, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20250314110016_HcIQuDGRmsbByeAE/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 5.4.0 (pre-install)
+#### Update from 5.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -425,7 +440,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.4.0_5.5.0_hdiff_RCsszbNmxZciMvkK.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.4.0_5.5.0_hdiff_RCsszbNmxZciMvkK.zip) | Japanese voice-over | 326.91 MiB | `471020c4184331a9159b29ed3107804d` |
 | [audio_ko-kr_5.4.0_5.5.0_hdiff_gKGHXRscunFdPzdH.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.4.0_5.5.0_hdiff_gKGHXRscunFdPzdH.zip) | Korean voice-over | 274.61 MiB | `afca3b2d11fa6068b59821ec0dfa0948` |
 
-#### Update from 5.3.0 (pre-install)
+#### Update from 5.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -458,7 +473,7 @@ Seen in the API as the live version from 2025-02-12 to 2025-03-25, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20250125201352_EiPmYLKVptWspsHf/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 5.3.0 (pre-install)
+#### Update from 5.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -468,7 +483,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.3.0_5.4.0_hdiff_GYvLQJtloHewyhAd.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.3.0_5.4.0_hdiff_GYvLQJtloHewyhAd.zip) | Japanese voice-over | 485.99 MiB | `5cbfe6c148a280bdfd8bea4054667587` |
 | [audio_ko-kr_5.3.0_5.4.0_hdiff_bHMaFGHIWezvVoGL.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.3.0_5.4.0_hdiff_bHMaFGHIWezvVoGL.zip) | Korean voice-over | 409.76 MiB | `3c7bc585055e508af6ac15aa768b16f9` |
 
-#### Update from 5.2.0 (pre-install)
+#### Update from 5.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -501,7 +516,7 @@ Seen in the API as the live version from 2025-01-01 to 2025-02-11, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20241219110745_1vT3FzXdDTDFZFrL/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 5.2.0 (pre-install)
+#### Update from 5.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -511,7 +526,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.2.0_5.3.0_hdiff_mqXJGZjryItulRRx.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.2.0_5.3.0_hdiff_mqXJGZjryItulRRx.zip) | Japanese voice-over | 803.66 MiB | `68146dc2e2ea63b0cae452ea01b23136` |
 | [audio_ko-kr_5.2.0_5.3.0_hdiff_oyddjWZZfxEwaTYM.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.2.0_5.3.0_hdiff_oyddjWZZfxEwaTYM.zip) | Korean voice-over | 703.04 MiB | `fcee09acf85cdd2dd1d30bdea69c9065` |
 
-#### Update from 5.1.0 (pre-install)
+#### Update from 5.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -543,7 +558,7 @@ Seen in the API as the live version from 2024-11-20 to 2024-12-31, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20241108173711_97p3DLcQqGoVFVR0/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 5.1.0 (pre-install)
+#### Update from 5.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -553,7 +568,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.1.0_5.2.0_hdiff_viAIYCwPGzRJVDqV.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.1.0_5.2.0_hdiff_viAIYCwPGzRJVDqV.zip) | Japanese voice-over | 311.53 MiB | `dea044b964457116a74656627906e104` |
 | [audio_ko-kr_5.1.0_5.2.0_hdiff_kpURIBxLmNZpuqWi.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.1.0_5.2.0_hdiff_kpURIBxLmNZpuqWi.zip) | Korean voice-over | 281.78 MiB | `1ed412136f723515f3da76a8349e9ab8` |
 
-#### Update from 5.0.0 (pre-install)
+#### Update from 5.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -585,7 +600,7 @@ Seen in the API as the live version from 2024-10-09 to 2024-11-19, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240927184459_CVopfb3tD4Zi3As6/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 5.0.0 (pre-install)
+#### Update from 5.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -595,7 +610,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.0.0_5.1.0_hdiff_cSIWEmsNoqluMIrF.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.0.0_5.1.0_hdiff_cSIWEmsNoqluMIrF.zip) | Japanese voice-over | 608.07 MiB | `de00c4d5d02dead7b8e80c68ab57db17` |
 | [audio_ko-kr_5.0.0_5.1.0_hdiff_PumQPsFuEgvDnZyX.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.0.0_5.1.0_hdiff_PumQPsFuEgvDnZyX.zip) | Korean voice-over | 526.03 MiB | `0d77474fe49e46cdfc20298034501019` |
 
-#### Update from 4.8.0 (pre-install)
+#### Update from 4.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -627,7 +642,7 @@ Seen in the API as the live version from 2024-08-28 to 2024-10-08, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240816185649_LtymMnnIZVQfbLZ2/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.8.0 (pre-install)
+#### Update from 4.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -637,7 +652,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_4.8.0_5.0.0_hdiff_LumPhRraNOjGJMnG.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_4.8.0_5.0.0_hdiff_LumPhRraNOjGJMnG.zip) | Japanese voice-over | 733.02 MiB | `934899593f7234bec937fca98c0b0bed` |
 | [audio_ko-kr_4.8.0_5.0.0_hdiff_gTmBNUAGPpXxrRKC.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_4.8.0_5.0.0_hdiff_gTmBNUAGPpXxrRKC.zip) | Korean voice-over | 617.06 MiB | `64c52d4065a5d5983b37faeb9796a3eb` |
 
-#### Update from 4.7.0 (pre-install)
+#### Update from 4.7.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -651,6 +666,8 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 
 <details>
 <summary><b>Version 4.x</b>: 4.0.0 to 4.8.0 (10 versions)</summary>
+
+Jump to: [4.8.0](#480) · [4.7.0](#470) · [4.6.0](#460) · [4.5.0](#450) · [4.4.0](#440) · [4.3.0](#430) · [4.2.0](#420) · [4.1.0](#410) · [4.0.1](#401) · [4.0.0](#400)
 
 ### 4.8.0
 
@@ -673,7 +690,7 @@ Seen in the API as the live version from 2024-07-18 to 2024-08-27 (UTC).
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240705190845_sEVV7ebRBuMrOheE/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.7.0 (pre-install)
+#### Update from 4.7.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -683,7 +700,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_4.7.0_4.8.0_hdiff_TpngPXQdYNIqGmBB.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_4.7.0_4.8.0_hdiff_TpngPXQdYNIqGmBB.zip) | Japanese voice-over | 398.03 MiB | `66ec311c85b05fda917526f36361c9ef` |
 | [audio_ko-kr_4.7.0_4.8.0_hdiff_VAmyxLulAOgLBfEQ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_4.7.0_4.8.0_hdiff_VAmyxLulAOgLBfEQ.zip) | Korean voice-over | 322.57 MiB | `47daefe2506360faef5a46c1f8661bdc` |
 
-#### Update from 4.6.0 (pre-install)
+#### Update from 4.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -714,7 +731,7 @@ Seen in the API as the live version from 2024-06-05 to 2024-07-17, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240524181522_P7n5afVhY8WeoVZb/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.6.0 (pre-install)
+#### Update from 4.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -724,7 +741,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.6.0_4.7.0_hdiff_NeDO7m6dnx3cLRpy.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.6.0_4.7.0_hdiff_NeDO7m6dnx3cLRpy.zip) | Japanese voice-over | 579.81 MiB | `8406125f361fc533e3b174e749c87b39` |
 | [ko-kr_4.6.0_4.7.0_hdiff_3qryOQWP2YDnKmBA.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.6.0_4.7.0_hdiff_3qryOQWP2YDnKmBA.zip) | Korean voice-over | 458.70 MiB | `a2c6d59146ec07f05f5a003ff93aa6e0` |
 
-#### Update from 4.5.0 (pre-install)
+#### Update from 4.5.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -755,7 +772,7 @@ Seen in the API as the live version from 2024-04-24 to 2024-06-04, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240412191920_HThGUGlY3Gjy6AXP/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.5.0 (pre-install)
+#### Update from 4.5.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -765,7 +782,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.5.0_4.6.0_hdiff_dNhr1mUeITOnZ76R.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.5.0_4.6.0_hdiff_dNhr1mUeITOnZ76R.zip) | Japanese voice-over | 338.69 MiB | `ee4e47e80478a378cd78b0467b7aa1ba` |
 | [ko-kr_4.5.0_4.6.0_hdiff_wrnM3Vumg5xSbKEa.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.5.0_4.6.0_hdiff_wrnM3Vumg5xSbKEa.zip) | Korean voice-over | 273.97 MiB | `6aec8a51b5bbed306251534da406e505` |
 
-#### Update from 4.4.0 (pre-install)
+#### Update from 4.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -798,7 +815,7 @@ Seen in the API as the live version from 2024-03-13 to 2024-04-23, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240301203033_RZSIny3hwJ5nq959/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.4.0 (pre-install)
+#### Update from 4.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -808,7 +825,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.4.0_4.5.0_hdiff_D16LijOxqwgfCSWa.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.4.0_4.5.0_hdiff_D16LijOxqwgfCSWa.zip) | Japanese voice-over | 366.54 MiB | `74a1342b469072bf77d1ab1ded5f1569` |
 | [ko-kr_4.4.0_4.5.0_hdiff_v7HhnQibzTMAuO5B.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.4.0_4.5.0_hdiff_v7HhnQibzTMAuO5B.zip) | Korean voice-over | 299.97 MiB | `16aa71f9aec2bd13afa7e45ad7274d18` |
 
-#### Update from 4.3.0 (pre-install)
+#### Update from 4.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -840,7 +857,7 @@ Seen in the API as the live version from 2024-01-31 to 2024-03-12, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20240119183743_YjHC1oBl0Hsgxkub/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.3.0 (pre-install)
+#### Update from 4.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -850,7 +867,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.3.0_4.4.0_hdiff_rnLX9isdJVu81afS.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.3.0_4.4.0_hdiff_rnLX9isdJVu81afS.zip) | Japanese voice-over | 439.98 MiB | `ea2a5429ae24f49984bd4f4ee2f0a80d` |
 | [ko-kr_4.3.0_4.4.0_hdiff_VzPIgE8jrkbZc1T4.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.3.0_4.4.0_hdiff_VzPIgE8jrkbZc1T4.zip) | Korean voice-over | 353.10 MiB | `5d1d91973e71236d13a9638fe5e1ac7a` |
 
-#### Update from 4.2.0 (pre-install)
+#### Update from 4.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -882,7 +899,7 @@ Seen in the API as the live version from 2023-12-20 to 2024-01-30, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20231208190631_76nrKFC3l3HQt1yg/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.2.0 (pre-install)
+#### Update from 4.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -892,7 +909,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.2.0_4.3.0_hdiff_5hwF9mPYkgCy7uca.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.2.0_4.3.0_hdiff_5hwF9mPYkgCy7uca.zip) | Japanese voice-over | 393.26 MiB | `10507f960efb3bd21e7a104382082e64` |
 | [ko-kr_4.2.0_4.3.0_hdiff_dsziMCt2DKNYe3IR.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.2.0_4.3.0_hdiff_dsziMCt2DKNYe3IR.zip) | Korean voice-over | 311.52 MiB | `301a330da0c23b4634f9cc8a505d169d` |
 
-#### Update from 4.1.0 (pre-install)
+#### Update from 4.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -925,7 +942,7 @@ Seen in the API as the live version from 2023-11-08 to 2023-12-19, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20231030132335_iOEfPMcbrXpiA8Ca/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.1.0 (pre-install)
+#### Update from 4.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -935,7 +952,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.1.0_4.2.0_hdiff_JFoP2gn0tx7ks1Hd.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.1.0_4.2.0_hdiff_JFoP2gn0tx7ks1Hd.zip) | Japanese voice-over | 531.08 MiB | `e403089a19c2e87a14b0271bf50c55d3` |
 | [ko-kr_4.1.0_4.2.0_hdiff_PoiVS3Y0REXAgfeJ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.1.0_4.2.0_hdiff_PoiVS3Y0REXAgfeJ.zip) | Korean voice-over | 466.59 MiB | `66ab9e4930b87dd1b551dcc6c3f45a72` |
 
-#### Update from 4.0.1 (pre-install)
+#### Update from 4.0.1
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -945,7 +962,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.0.1_4.2.0_hdiff_9VMCIDbRsGuFx8UK.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.0.1_4.2.0_hdiff_9VMCIDbRsGuFx8UK.zip) | Japanese voice-over | 1.16 GiB | `c78ccdd9a5fe057c14c5b9a6c72ff910` |
 | [ko-kr_4.0.1_4.2.0_hdiff_eVUcYlKhFQPHnZwu.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.0.1_4.2.0_hdiff_eVUcYlKhFQPHnZwu.zip) | Korean voice-over | 1012.02 MiB | `b400b146f4aa6bbb5c82ca60cbeeed4b` |
 
-#### Update from 4.0.0 (pre-install)
+#### Update from 4.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -978,7 +995,7 @@ Seen in the API as the live version from 2023-09-27 to 2023-11-07, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230916101725_v2XCKuuvzCVh3BdI/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.0.1 (pre-install)
+#### Update from 4.0.1
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -988,7 +1005,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.0.1_4.1.0_hdiff_otzl30WOYGHJnqec.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.0.1_4.1.0_hdiff_otzl30WOYGHJnqec.zip) | Japanese voice-over | 649.36 MiB | `c245337aad41305b51b4db2731a0b8c6` |
 | [ko-kr_4.0.1_4.1.0_hdiff_wPMhbF6pWidXovEe.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.0.1_4.1.0_hdiff_wPMhbF6pWidXovEe.zip) | Korean voice-over | 532.69 MiB | `45b22080ba7ef81265a16e96c593738b` |
 
-#### Update from 4.0.0 (pre-install)
+#### Update from 4.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -998,7 +1015,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.0.0_4.1.0_hdiff_2SE4Oagr0ZNxF9lY.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.0.0_4.1.0_hdiff_2SE4Oagr0ZNxF9lY.zip) | Japanese voice-over | 649.36 MiB | `52e1d6e75bfdb10dbdab83ae45d78865` |
 | [ko-kr_4.0.0_4.1.0_hdiff_Kg5FVU1AJ4hEMzC8.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.0.0_4.1.0_hdiff_Kg5FVU1AJ4hEMzC8.zip) | Korean voice-over | 532.69 MiB | `d983bbe80f51839e221f6f58507fb7e6` |
 
-#### Update from 3.8.0 (pre-install)
+#### Update from 3.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1029,7 +1046,7 @@ Seen in the API as the live version from 2023-08-23 to 2023-09-26 (UTC).
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230821151229_NAlBxGiyKlVXWZQJ/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 4.0.0 (pre-install)
+#### Update from 4.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1039,7 +1056,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.0.0_4.0.1_hdiff_0ja7pUAEQLc6KRvi.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.0.0_4.0.1_hdiff_0ja7pUAEQLc6KRvi.zip) | Japanese voice-over | 0.02 KiB | `76cdb2bad9582d23c1f6f4d868218d6c` |
 | [ko-kr_4.0.0_4.0.1_hdiff_r1PQymX6DeFWcdv5.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.0.0_4.0.1_hdiff_r1PQymX6DeFWcdv5.zip) | Korean voice-over | 0.02 KiB | `76cdb2bad9582d23c1f6f4d868218d6c` |
 
-#### Update from 3.8.0 (pre-install)
+#### Update from 3.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1071,7 +1088,7 @@ Seen in the API as the live version from 2023-08-16 to 2023-08-22, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230804185804_eTmE8EZjJZdAJapq/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 3.8.0 (pre-install)
+#### Update from 3.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1081,7 +1098,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.8.0_4.0.0_hdiff_lN024VYf9jhzPbBo.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.8.0_4.0.0_hdiff_lN024VYf9jhzPbBo.zip) | Japanese voice-over | 713.14 MiB | `860d203710e0e9fd54bad6d64ad7bed4` |
 | [ko-kr_3.8.0_4.0.0_hdiff_GR7WVCPuATEyjxK2.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.8.0_4.0.0_hdiff_GR7WVCPuATEyjxK2.zip) | Korean voice-over | 619.41 MiB | `a363160326f45589ba71844a82ac580a` |
 
-#### Update from 3.7.0 (pre-install)
+#### Update from 3.7.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1095,6 +1112,8 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 
 <details>
 <summary><b>Version 3.x</b>: 3.0.0 to 3.8.0 (9 versions)</summary>
+
+Jump to: [3.8.0](#380) · [3.7.0](#370) · [3.6.0](#360) · [3.5.0](#350) · [3.4.0](#340) · [3.3.0](#330) · [3.2.0](#320) · [3.1.0](#310) · [3.0.0](#300)
 
 ### 3.8.0
 
@@ -1117,7 +1136,7 @@ Seen in the API as the live version from 2023-07-05 to 2023-08-15, pre-download 
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230625120419_BEKxsz5x6A7uZvGW/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 3.7.0 (pre-install)
+#### Update from 3.7.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1127,7 +1146,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.7.0_3.8.0_hdiff_femTrvp6gAP05RM1.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.7.0_3.8.0_hdiff_femTrvp6gAP05RM1.zip) | Japanese voice-over | 396.80 MiB | `2afe15426ccf0360fe16e2d7377e65fc` |
 | [ko-kr_3.7.0_3.8.0_hdiff_0mETUysXGcKuRja2.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.7.0_3.8.0_hdiff_0mETUysXGcKuRja2.zip) | Korean voice-over | 308.65 MiB | `4c76d498aa51fd12fc7bc9b1d7b62383` |
 
-#### Update from 3.6.0 (pre-install)
+#### Update from 3.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1151,14 +1170,14 @@ Seen in the API as the live version from 2023-05-24 to 2023-07-04, pre-download 
 | [GenshinImpact_3.7.0.zip.003](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/GenshinImpact_3.7.0.zip.003) | Game, part 3 of 5 | 10.00 GiB | `989d7df8b11fe781322eae27260c86f3` |
 | [GenshinImpact_3.7.0.zip.004](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/GenshinImpact_3.7.0.zip.004) | Game, part 4 of 5 | 10.00 GiB | `91fc90cb6f09712619f9943a5b1603cb` |
 | [GenshinImpact_3.7.0.zip.005](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/GenshinImpact_3.7.0.zip.005) | Game, part 5 of 5 | 7.54 GiB | `7350eb36815994a0fe93ea94544198bf` |
-| [Audio_Chinese_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_Chinese_3.7.0.zip) | Chinese voice-over | 9.38 GiB | `2b0fd39275a2974fc85ee1e9735b42b7` |
-| [Audio_English(US)_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_English%28US%29_3.7.0.zip) | English voice-over | 10.79 GiB | `43b360b3f5c71feb951a204f81a1d232` |
-| [Audio_Japanese_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_Japanese_3.7.0.zip) | Japanese voice-over | 12.15 GiB | `516ad9333520473c6ff3ac7fe6d1a5e9` |
-| [Audio_Korean_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_Korean_3.7.0.zip) | Korean voice-over | 9.18 GiB | `07251fd076e60111716c4ca970965a87` |
+| [Audio_Chinese_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_Chinese_3.7.0.zip) | Chinese voice-over | 9.38 GiB | `2b0fd39275a2974fc85ee1e9735b42b7` (published for 10071698310 bytes; the served file is 10075896724 bytes, so it may not match) |
+| [Audio_English(US)_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_English%28US%29_3.7.0.zip) | English voice-over | 10.79 GiB | `43b360b3f5c71feb951a204f81a1d232` (published for 11585674281 bytes; the served file is 11583388687 bytes, so it may not match) |
+| [Audio_Japanese_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_Japanese_3.7.0.zip) | Japanese voice-over | 12.15 GiB | `516ad9333520473c6ff3ac7fe6d1a5e9` (published for 13045963162 bytes; the served file is 13044193326 bytes, so it may not match) |
+| [Audio_Korean_3.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/Audio_Korean_3.7.0.zip) | Korean voice-over | 9.18 GiB | `07251fd076e60111716c4ca970965a87` (published for 9856949945 bytes; the served file is 9858003494 bytes, so it may not match) |
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230513200104_2odHBzbUAP5IOIvE/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 3.6.0 (pre-install)
+#### Update from 3.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1168,7 +1187,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.6.0_3.7.0_hdiff_x3n1GpVAtsylQwv7.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.6.0_3.7.0_hdiff_x3n1GpVAtsylQwv7.zip) | Japanese voice-over | 480.29 MiB | `fe3a4c481f33f3dae646d164b4491685` |
 | [ko-kr_3.6.0_3.7.0_hdiff_cT17sLmPlZfKkQuJ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.6.0_3.7.0_hdiff_cT17sLmPlZfKkQuJ.zip) | Korean voice-over | 353.05 MiB | `19bd9c8b418adce59433bab4bf3d402a` |
 
-#### Update from 3.5.0 (pre-install)
+#### Update from 3.5.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1186,20 +1205,20 @@ Seen in the API as the live version from 2023-04-12 to 2023-05-23, pre-download 
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
-| [GenshinImpact_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip) | Game, single archive | 47.62 GiB | `2686795437c83749e975333216d99edf` |
+| [GenshinImpact_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip) | Game, single archive | 47.62 GiB | `2686795437c83749e975333216d99edf` (published for 51131585659 bytes; the served file is 51134869445 bytes, so it may not match) |
 | [GenshinImpact_3.6.0.zip.001](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip.001) | Game, part 1 of 5 | 10.00 GiB | `dfb4a52b7c1df52b575399c88387a834` |
 | [GenshinImpact_3.6.0.zip.002](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip.002) | Game, part 2 of 5 | 10.00 GiB | `732de764330a7e91caf797ea42d033eb` |
 | [GenshinImpact_3.6.0.zip.003](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip.003) | Game, part 3 of 5 | 10.00 GiB | `996ba698498e61f5c17e3930a34611a1` |
 | [GenshinImpact_3.6.0.zip.004](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip.004) | Game, part 4 of 5 | 10.00 GiB | `6af5899787aa820f55b03a2778a99d3e` |
 | [GenshinImpact_3.6.0.zip.005](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/GenshinImpact_3.6.0.zip.005) | Game, part 5 of 5 | 6.56 GiB | `4270ab2beb4fbeec4b97018c3c4dc66a` |
-| [Audio_Chinese_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_Chinese_3.6.0.zip) | Chinese voice-over | 8.97 GiB | `69a082ebb35929d1392318c2c4ec045c` |
-| [Audio_English(US)_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_English%28US%29_3.6.0.zip) | English voice-over | 10.28 GiB | `91efd98ed1eb3b39ab93588789d402da` |
-| [Audio_Japanese_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_Japanese_3.6.0.zip) | Japanese voice-over | 11.56 GiB | `565cb3fddbe213c49308749b44e9a562` |
-| [Audio_Korean_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_Korean_3.6.0.zip) | Korean voice-over | 8.79 GiB | `7fc1859050f138fb13fe4eb6e2fb8573` |
+| [Audio_Chinese_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_Chinese_3.6.0.zip) | Chinese voice-over | 8.97 GiB | `69a082ebb35929d1392318c2c4ec045c` (published for 9631464162 bytes; the served file is 9626507183 bytes, so it may not match) |
+| [Audio_English(US)_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_English%28US%29_3.6.0.zip) | English voice-over | 10.28 GiB | `91efd98ed1eb3b39ab93588789d402da` (published for 11038065951 bytes; the served file is 11041923626 bytes, so it may not match) |
+| [Audio_Japanese_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_Japanese_3.6.0.zip) | Japanese voice-over | 11.56 GiB | `565cb3fddbe213c49308749b44e9a562` (published for 12412455486 bytes; the served file is 12412394814 bytes, so it may not match) |
+| [Audio_Korean_3.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/Audio_Korean_3.6.0.zip) | Korean voice-over | 8.79 GiB | `7fc1859050f138fb13fe4eb6e2fb8573` (published for 9438190633 bytes; the served file is 9434740241 bytes, so it may not match) |
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230331200258_xR748JQdRJ19pQH0/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 3.5.0 (pre-install)
+#### Update from 3.5.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1209,7 +1228,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.5.0_3.6.0_hdiff_6ewT53aBmuNbdPJE.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.5.0_3.6.0_hdiff_6ewT53aBmuNbdPJE.zip) | Japanese voice-over | 545.94 MiB | `432385e20612038143e664ae6717e16d` |
 | [ko-kr_3.5.0_3.6.0_hdiff_GDlPHvUgyXQwje9C.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.5.0_3.6.0_hdiff_GDlPHvUgyXQwje9C.zip) | Korean voice-over | 482.66 MiB | `30e21b012374f55fd5d123a2840a2e04` |
 
-#### Update from 3.4.0 (pre-install)
+#### Update from 3.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1227,20 +1246,20 @@ Seen in the API as the live version from 2023-03-17 to 2023-04-11 (UTC).
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
-| [GenshinImpact_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip) | Game, single archive | 44.66 GiB | `1e6334da5268caf47e17d2fa12e9bef1` |
+| [GenshinImpact_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip) | Game, single archive | 44.66 GiB | `1e6334da5268caf47e17d2fa12e9bef1` (published for 47953309860 bytes; the served file is 47955087332 bytes, so it may not match) |
 | [GenshinImpact_3.5.0.zip.001](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip.001) | Game, part 1 of 5 | 10.00 GiB | `4551716f735af6a5cf8b8565250d1eca` |
 | [GenshinImpact_3.5.0.zip.002](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip.002) | Game, part 2 of 5 | 10.00 GiB | `869529539a9cedde466b68ad5c7de4d1` |
 | [GenshinImpact_3.5.0.zip.003](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip.003) | Game, part 3 of 5 | 10.00 GiB | `c2704558567c6c02c0c676acf23d8efa` |
 | [GenshinImpact_3.5.0.zip.004](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip.004) | Game, part 4 of 5 | 10.00 GiB | `2bf1060bf1b0d743562b3330eb6e2f7d` |
 | [GenshinImpact_3.5.0.zip.005](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/GenshinImpact_3.5.0.zip.005) | Game, part 5 of 5 | 3.61 GiB | `0f5059a7538b35e959f7a4c0c4acccf4` |
-| [Audio_Chinese_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_Chinese_3.5.0.zip) | Chinese voice-over | 8.44 GiB | `fa18f4adccdbffb7d19ff4f077250571` |
-| [Audio_English(US)_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_English%28US%29_3.5.0.zip) | English voice-over | 9.64 GiB | `b04087a83c0a9d588bd4dff665a2aba2` |
-| [Audio_Japanese_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_Japanese_3.5.0.zip) | Japanese voice-over | 10.84 GiB | `d8b640026a782cba817e59a196a6a747` |
-| [Audio_Korean_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_Korean_3.5.0.zip) | Korean voice-over | 8.25 GiB | `b947fc7b6dac078cc863223827e5c5f0` |
+| [Audio_Chinese_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_Chinese_3.5.0.zip) | Chinese voice-over | 8.44 GiB | `fa18f4adccdbffb7d19ff4f077250571` (published for 9062380995 bytes; the served file is 9062211706 bytes, so it may not match) |
+| [Audio_English(US)_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_English%28US%29_3.5.0.zip) | English voice-over | 9.64 GiB | `b04087a83c0a9d588bd4dff665a2aba2` (published for 10350871184 bytes; the served file is 10352216788 bytes, so it may not match) |
+| [Audio_Japanese_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_Japanese_3.5.0.zip) | Japanese voice-over | 10.84 GiB | `d8b640026a782cba817e59a196a6a747` (published for 11639361373 bytes; the served file is 11641998846 bytes, so it may not match) |
+| [Audio_Korean_3.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/Audio_Korean_3.5.0.zip) | Korean voice-over | 8.25 GiB | `b947fc7b6dac078cc863223827e5c5f0` (published for 8858370048 bytes; the served file is 8862007457 bytes, so it may not match) |
 
 Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230220120928_iIYV9krGiWL06eeB/ScatteredFiles` (file list in `pkg_version`).
 
-#### Update from 3.4.0 (pre-install)
+#### Update from 3.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1250,7 +1269,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.4.0_3.5.0_hdiff_7GSo18Z9C2rOiDjp.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.4.0_3.5.0_hdiff_7GSo18Z9C2rOiDjp.zip) | Japanese voice-over | 543.32 MiB | `7452317bf85bda6764ae6006d75950f2` |
 | [ko-kr_3.4.0_3.5.0_hdiff_CvwZI7isgHbkAanc.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.4.0_3.5.0_hdiff_CvwZI7isgHbkAanc.zip) | Korean voice-over | 434.66 MiB | `0b3129ddbf83f8735231966be080723a` |
 
-#### Update from 3.3.0 (pre-install)
+#### Update from 3.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1272,7 +1291,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_3.4.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230109135018_10QhExKHwAoa4ecr/Audio_Japanese_3.4.0.zip) (dead link, HTTP 404) | Japanese voice-over | unknown |  |
 | [Audio_Korean_3.4.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230109135018_10QhExKHwAoa4ecr/Audio_Korean_3.4.0.zip) (dead link, HTTP 404) | Korean voice-over | unknown |  |
 
-#### Update from 3.3.0 (pre-install)
+#### Update from 3.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1282,7 +1301,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.3.0_3.4.0_hdiff_4RnJjQLArch3yGOt.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.3.0_3.4.0_hdiff_4RnJjQLArch3yGOt.zip) | Japanese voice-over | 451.21 MiB |  |
 | [ko-kr_3.3.0_3.4.0_hdiff_j3fribpBSCJaMUnE.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.3.0_3.4.0_hdiff_j3fribpBSCJaMUnE.zip) | Korean voice-over | 353.58 MiB |  |
 
-#### Update from 3.2.0 (pre-install)
+#### Update from 3.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1304,7 +1323,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_3.3.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221128113321_cOH1qEM6iRagjJC6/Audio_Japanese_3.3.0.zip) | Japanese voice-over | 9.55 GiB |  |
 | [Audio_Korean_3.3.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221128113321_cOH1qEM6iRagjJC6/Audio_Korean_3.3.0.zip) | Korean voice-over | 7.35 GiB |  |
 
-#### Update from 3.2.0 (pre-install)
+#### Update from 3.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1314,7 +1333,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.2.0_3.3.0_hdiff_DE9YUdTvyOecHkih.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.2.0_3.3.0_hdiff_DE9YUdTvyOecHkih.zip) | Japanese voice-over | 470.71 MiB |  |
 | [ko-kr_3.2.0_3.3.0_hdiff_jfd7VWceoaE0A4uB.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.2.0_3.3.0_hdiff_jfd7VWceoaE0A4uB.zip) | Korean voice-over | 387.82 MiB |  |
 
-#### Update from 3.1.0 (pre-install)
+#### Update from 3.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1336,7 +1355,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_3.2.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/Audio_Japanese_3.2.0.zip) (dead link, HTTP 404) | Japanese voice-over | unknown |  |
 | [Audio_Korean_3.2.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/Audio_Korean_3.2.0.zip) (dead link, HTTP 404) | Korean voice-over | unknown |  |
 
-#### Update from 3.1.0 (pre-install)
+#### Update from 3.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1346,7 +1365,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.1.0_3.2.0_hdiff_mHfx98gkNpB36szQ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.1.0_3.2.0_hdiff_mHfx98gkNpB36szQ.zip) | Japanese voice-over | 652.15 MiB |  |
 | [ko-kr_3.1.0_3.2.0_hdiff_dZwqgxaJQusz5e7E.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.1.0_3.2.0_hdiff_dZwqgxaJQusz5e7E.zip) | Korean voice-over | 521.26 MiB |  |
 
-#### Update from 3.0.0 (pre-install)
+#### Update from 3.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1368,7 +1387,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_3.1.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220917165430_NyMmj1Ta9KlZKgCZ/Audio_Japanese_3.1.0.zip) | Japanese voice-over | 10.45 GiB |  |
 | [Audio_Korean_3.1.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220917165430_NyMmj1Ta9KlZKgCZ/Audio_Korean_3.1.0.zip) | Korean voice-over | 8.08 GiB |  |
 
-#### Update from 3.0.0 (pre-install)
+#### Update from 3.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1378,7 +1397,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_3.0.0_3.1.0_hdiff_3NZcVbSxzvXgMaq9.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_3.0.0_3.1.0_hdiff_3NZcVbSxzvXgMaq9.zip) | Japanese voice-over | 648.68 MiB |  |
 | [ko-kr_3.0.0_3.1.0_hdiff_AhytWDJvIYoPU9nZ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_3.0.0_3.1.0_hdiff_AhytWDJvIYoPU9nZ.zip) | Korean voice-over | 562.00 MiB |  |
 
-#### Update from 2.8.0 (pre-install)
+#### Update from 2.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1400,7 +1419,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_3.0.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220815143807_dyIghvy1b5fjfzHU/Audio_Japanese_3.0.0.zip) | Japanese voice-over | 9.61 GiB |  |
 | [Audio_Korean_3.0.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220815143807_dyIghvy1b5fjfzHU/Audio_Korean_3.0.0.zip) | Korean voice-over | 7.43 GiB |  |
 
-#### Update from 2.8.0 (pre-install)
+#### Update from 2.8.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1410,7 +1429,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.8.0_3.0.0_hdiff_FiYR9adhksO62VcZ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.8.0_3.0.0_hdiff_FiYR9adhksO62VcZ.zip) | Japanese voice-over | 659.59 MiB |  |
 | [ko-kr_2.8.0_3.0.0_hdiff_rckI0qyC8V3xBaep.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.8.0_3.0.0_hdiff_rckI0qyC8V3xBaep.zip) | Korean voice-over | 577.34 MiB |  |
 
-#### Update from 2.7.0 (pre-install)
+#### Update from 2.7.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1425,6 +1444,8 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 <details>
 <summary><b>Version 2.x</b>: 2.0.0 to 2.8.0 (9 versions)</summary>
 
+Jump to: [2.8.0](#280) · [2.7.0](#270) · [2.6.0](#260) · [2.5.0](#250) · [2.4.0](#240) · [2.3.0](#230) · [2.2.0](#220) · [2.1.0](#210) · [2.0.0](#200)
+
 ### 2.8.0
 
 #### Full install
@@ -1437,7 +1458,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.8.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220625012443_r2qBGYstD0u3Q9xK/Audio_Japanese_2.8.0.zip) | Japanese voice-over | 8.72 GiB |  |
 | [Audio_Korean_2.8.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220625012443_r2qBGYstD0u3Q9xK/Audio_Korean_2.8.0.zip) | Korean voice-over | 6.78 GiB |  |
 
-#### Update from 2.7.0 (pre-install)
+#### Update from 2.7.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1447,7 +1468,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.7.0_2.8.0_hdiff_ozU04InEe5NDf9RJ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.7.0_2.8.0_hdiff_ozU04InEe5NDf9RJ.zip) | Japanese voice-over | 843.45 MiB |  |
 | [ko-kr_2.7.0_2.8.0_hdiff_YB9GdcHPnj4KisZo.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.7.0_2.8.0_hdiff_YB9GdcHPnj4KisZo.zip) | Korean voice-over | 762.81 MiB |  |
 
-#### Update from 2.6.0 (pre-install)
+#### Update from 2.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1469,7 +1490,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220429112415_dDweiEHDnBI6cKmM/Audio_Japanese_2.7.0.zip) | Japanese voice-over | 7.91 GiB |  |
 | [Audio_Korean_2.7.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220429112415_dDweiEHDnBI6cKmM/Audio_Korean_2.7.0.zip) | Korean voice-over | 6.14 GiB |  |
 
-#### Update from 2.6.0 (pre-install)
+#### Update from 2.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1479,7 +1500,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.6.0_2.7.0_hdiff_5yDzjBLv08wFRsmx.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.6.0_2.7.0_hdiff_5yDzjBLv08wFRsmx.zip) | Japanese voice-over | 5.99 GiB |  |
 | [ko-kr_2.6.0_2.7.0_hdiff_GnYMmTClWghVKSQk.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.6.0_2.7.0_hdiff_GnYMmTClWghVKSQk.zip) | Korean voice-over | 4.99 GiB |  |
 
-#### Update from 2.5.0 (pre-install)
+#### Update from 2.5.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1501,7 +1522,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220318211020_aWEQCaw5ZERt54rm/Audio_Japanese_2.6.0.zip) | Japanese voice-over | 7.47 GiB |  |
 | [Audio_Korean_2.6.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220318211020_aWEQCaw5ZERt54rm/Audio_Korean_2.6.0.zip) | Korean voice-over | 5.84 GiB |  |
 
-#### Update from 2.5.0 (pre-install)
+#### Update from 2.5.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1511,7 +1532,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.5.0_2.6.0_hdiff_gRwTfd4VsJXLv9uY.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.5.0_2.6.0_hdiff_gRwTfd4VsJXLv9uY.zip) | Japanese voice-over | 452.34 MiB |  |
 | [ko-kr_2.5.0_2.6.0_hdiff_20EY6qkb8IetwBK9.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.5.0_2.6.0_hdiff_20EY6qkb8IetwBK9.zip) | Korean voice-over | 375.99 MiB |  |
 
-#### Update from 2.4.0 (pre-install)
+#### Update from 2.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1533,7 +1554,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220125104720_x2gRaOdngikczohR/Audio_Japanese_2.5.0.zip) | Japanese voice-over | 6.89 GiB |  |
 | [Audio_Korean_2.5.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20220125104720_x2gRaOdngikczohR/Audio_Korean_2.5.0.zip) | Korean voice-over | 5.42 GiB |  |
 
-#### Update from 2.4.0 (pre-install)
+#### Update from 2.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1543,7 +1564,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.4.0_2.5.0_hdiff_t0MU7XpPc3ofbYwD.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.4.0_2.5.0_hdiff_t0MU7XpPc3ofbYwD.zip) | Japanese voice-over | 345.92 MiB |  |
 | [ko-kr_2.4.0_2.5.0_hdiff_0BLZeojnu59RDlx4.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.4.0_2.5.0_hdiff_0BLZeojnu59RDlx4.zip) | Korean voice-over | 263.11 MiB |  |
 
-#### Update from 2.3.0 (pre-install)
+#### Update from 2.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1565,7 +1586,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.4.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20211225051318_JHACtHpvJ2yRaZH0/Audio_Japanese_2.4.0.zip) | Japanese voice-over | 6.48 GiB |  |
 | [Audio_Korean_2.4.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20211225051318_JHACtHpvJ2yRaZH0/Audio_Korean_2.4.0.zip) | Korean voice-over | 5.13 GiB |  |
 
-#### Update from 2.3.0 (pre-install)
+#### Update from 2.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1575,7 +1596,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.3.0_2.4.0_diff_VnP5l3toBOKUapvi.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.3.0_2.4.0_diff_VnP5l3toBOKUapvi.zip) | Japanese voice-over | 519.32 MiB |  |
 | [ko-kr_2.3.0_2.4.0_diff_nykbuZGrtEsg5eTz.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.3.0_2.4.0_diff_nykbuZGrtEsg5eTz.zip) | Korean voice-over | 391.30 MiB |  |
 
-#### Update from 2.2.0 (pre-install)
+#### Update from 2.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1597,7 +1618,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.3.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20211117173404_G0gLRnxvOd4PvSu9/Audio_Japanese_2.3.0.zip) | Japanese voice-over | 5.88 GiB |  |
 | [Audio_Korean_2.3.0.zip](https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20211117173404_G0gLRnxvOd4PvSu9/Audio_Korean_2.3.0.zip) | Korean voice-over | 4.70 GiB |  |
 
-#### Update from 2.2.0 (pre-install)
+#### Update from 2.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1607,7 +1628,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.2.0_2.3.0_diff_iVDQPpkNu4etM5Xo.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.2.0_2.3.0_diff_iVDQPpkNu4etM5Xo.zip) | Japanese voice-over | 481.30 MiB |  |
 | [ko-kr_2.2.0_2.3.0_diff_r6zX1n48Hh5LUBK7.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.2.0_2.3.0_diff_r6zX1n48Hh5LUBK7.zip) | Korean voice-over | 376.49 MiB |  |
 
-#### Update from 2.1.0 (pre-install)
+#### Update from 2.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1629,7 +1650,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.2.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20211013_407d783aa6b98191/Audio_Japanese_2.2.0.zip) | Japanese voice-over | 5.33 GiB |  |
 | [Audio_Korean_2.2.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20211013_407d783aa6b98191/Audio_Korean_2.2.0.zip) | Korean voice-over | 4.28 GiB |  |
 
-#### Update from 2.1.0 (pre-install)
+#### Update from 2.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1639,7 +1660,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.1.0_2.2.0_diff_UC6QMjzTyguFKomW.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.1.0_2.2.0_diff_UC6QMjzTyguFKomW.zip) | Japanese voice-over | 331.30 MiB |  |
 | [ko-kr_2.1.0_2.2.0_diff_rynlNTw32CAubHjk.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.1.0_2.2.0_diff_rynlNTw32CAubHjk.zip) | Korean voice-over | 251.66 MiB |  |
 
-#### Update from 2.0.0 (pre-install)
+#### Update from 2.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1661,7 +1682,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.1.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210901_db535e31166295ac/Audio_Japanese_2.1.0.zip) | Japanese voice-over | 4.94 GiB |  |
 | [Audio_Korean_2.1.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210901_db535e31166295ac/Audio_Korean_2.1.0.zip) | Korean voice-over | 4.00 GiB |  |
 
-#### Update from 2.0.0 (pre-install)
+#### Update from 2.0.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1671,7 +1692,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_2.0.0_2.1.0_diff_Ub6DpehQk19xKEVa.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_2.0.0_2.1.0_diff_Ub6DpehQk19xKEVa.zip) | Japanese voice-over | 537.73 MiB |  |
 | [ko-kr_2.0.0_2.1.0_diff_SYrI5qspl1z4tBRn.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.0.0_2.1.0_diff_SYrI5qspl1z4tBRn.zip) | Korean voice-over | 728.59 MiB |  |
 
-#### Update from 1.6.1 (pre-install)
+#### Update from 1.6.1
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1694,7 +1715,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_2.0.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210721_3a3ca8dfe8b26ea2/Audio_Japanese_2.0.0.zip) | Japanese voice-over | 4.29 GiB |  |
 | [Audio_Korean_2.0.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210721_3a3ca8dfe8b26ea2/Audio_Korean_2.0.0.zip) | Korean voice-over | 3.50 GiB |  |
 
-#### Update from 1.6.1 (pre-install)
+#### Update from 1.6.1
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1704,7 +1725,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_1.6.1_2.0.0_diff_Rr1nlK3O0Wjgo4M2.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_1.6.1_2.0.0_diff_Rr1nlK3O0Wjgo4M2.zip) | Japanese voice-over | 489.74 MiB |  |
 | [ko-kr_1.6.1_2.0.0_diff_YHsxbir0lqzcvNIk.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_1.6.1_2.0.0_diff_YHsxbir0lqzcvNIk.zip) | Korean voice-over | 425.13 MiB |  |
 
-#### Update from 1.6.0 (pre-install)
+#### Update from 1.6.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1719,6 +1740,8 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 <details>
 <summary><b>Version 1.x</b>: 1.3.0 to 1.6.1 (6 versions)</summary>
 
+Jump to: [1.6.1](#161) · [1.6.0](#160) · [1.5.0](#150) · [1.4.0](#140) · [1.3.2](#132) · [1.3.0](#130)
+
 ### 1.6.1
 
 #### Full install
@@ -1726,10 +1749,13 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
 | [update_20210525213303_d009a819aTBew3U6.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/update_20210525213303_d009a819aTBew3U6.zip) | Launcher | 293.88 MiB |  |
+| [GenshinImpact_1.6.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_15f555799e5d6233/GenshinImpact_1.6.0.zip) | Game | 13.93 GiB |  |
 | [Audio_Chinese_1.6.1.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_eea40505c6337fd1/Audio_Chinese_1.6.1.zip) | Chinese voice-over | 3.23 GiB |  |
 | [Audio_English(US)_1.6.1.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_eea40505c6337fd1/Audio_English%28US%29_1.6.1.zip) | English voice-over | 3.45 GiB |  |
 | [Audio_Japanese_1.6.1.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_eea40505c6337fd1/Audio_Japanese_1.6.1.zip) | Japanese voice-over | 3.67 GiB |  |
 | [Audio_Korean_1.6.1.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_eea40505c6337fd1/Audio_Korean_1.6.1.zip) | Korean voice-over | 3.02 GiB |  |
+
+The game archive `GenshinImpact_1.6.0.zip` is named for an earlier release: upstream lists it as the 1.6.1 game data.
 
 ### 1.6.0
 
@@ -1744,7 +1770,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [Audio_Japanese_1.6.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_15f555799e5d6233/Audio_Japanese_1.6.0.zip) | Japanese voice-over | 3.67 GiB |  |
 | [Audio_Korean_1.6.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_15f555799e5d6233/Audio_Korean_1.6.0.zip) | Korean voice-over | 3.02 GiB |  |
 
-#### Update from 1.5.1 (pre-install)
+#### Update from 1.5.1
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1763,7 +1789,7 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [update_20210413104427.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/update_20210413104427.zip) | Launcher | 293.71 MiB |  |
 | [GenshinImpact_1.5.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210428_de80a243f7474c39/GenshinImpact_1.5.0.zip) | Game | 12.13 GiB |  |
 
-#### Update from 1.4.0 (pre-install)
+#### Update from 1.4.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1782,19 +1808,19 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [update_20210304190611.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/update_20210304190611.zip) | Launcher | 228.69 MiB |  |
 | [GenshinImpact_1.4.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210317_67c8f1002bb26672/GenshinImpact_1.4.0.zip) | Game | 20.68 GiB |  |
 
-#### Update from 1.3.2 (pre-install)
+#### Update from 1.3.2
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
 | [1.3.2_1.4.0_diff_1P539V4J.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/1.3.2_1.4.0_diff_1P539V4J.zip) | Game | 4.30 GiB |  |
 
-#### Update from 1.3.0 (pre-install)
+#### Update from 1.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
 | [1.3.0_1.4.0_diff_hLOEnPIc.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/1.3.0_1.4.0_diff_hLOEnPIc.zip) | Game | 4.30 GiB |  |
 
-#### Update from 1.2.0 (pre-install)
+#### Update from 1.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1808,13 +1834,13 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | --- | --- | --- | --- |
 | [GenshinImpact_1.3.2.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210210_b0516858014fc457/GenshinImpact_1.3.2.zip) | Game | 18.12 GiB |  |
 
-#### Update from 1.3.0 (pre-install)
+#### Update from 1.3.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
 | [1.3.0_1.3.2_diff_ryqTKPYO.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/1.3.0_1.3.2_diff_ryqTKPYO.zip) | Game | 159.21 MiB |  |
 
-#### Update from 1.2.0 (pre-install)
+#### Update from 1.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
@@ -1829,13 +1855,13 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [update_20210122154904.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/update_20210122154904.zip) | Launcher | 228.52 MiB |  |
 | [GenshinImpact_1.3.0.zip](https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210203_f97a39582b45649f/GenshinImpact_1.3.0.zip) | Game | 18.12 GiB |  |
 
-#### Update from 1.2.0 (pre-install)
+#### Update from 1.2.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |
 | [1.2.0_1.3.0_diff_sBM8DJZc.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/1.2.0_1.3.0_diff_sBM8DJZc.zip) | Game | 4.19 GiB |  |
 
-#### Update from 1.1.0 (pre-install)
+#### Update from 1.1.0
 
 | File | Content | Size | MD5 |
 | --- | --- | --- | --- |

@@ -300,6 +300,12 @@
           "http_status": 200
         },
         {
+          "kind": "game",
+          "url": "https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_15f555799e5d6233/GenshinImpact_1.6.0.zip",
+          "size": 14961007704,
+          "http_status": 200
+        },
+        {
           "kind": "audio",
           "language": "zh-cn",
           "url": "https://autopatchhk.yuanshen.com/client_app/pc_mihoyo/20210609_eea40505c6337fd1/Audio_Chinese_1.6.1.zip",
@@ -2044,7 +2050,8 @@
           "md5": "1e6334da5268caf47e17d2fa12e9bef1",
           "size": 47955087332,
           "decompressed_size": 95917105480,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 47953309860
         },
         {
           "kind": "game",
@@ -2093,7 +2100,8 @@
           "md5": "fa18f4adccdbffb7d19ff4f077250571",
           "size": 9062211706,
           "decompressed_size": 18135247750,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 9062380995
         },
         {
           "kind": "audio",
@@ -2102,7 +2110,8 @@
           "md5": "b04087a83c0a9d588bd4dff665a2aba2",
           "size": 10352216788,
           "decompressed_size": 20712228128,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 10350871184
         },
         {
           "kind": "audio",
@@ -2111,7 +2120,8 @@
           "md5": "d8b640026a782cba817e59a196a6a747",
           "size": 11641998846,
           "decompressed_size": 23289208506,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 11639361373
         },
         {
           "kind": "audio",
@@ -2120,7 +2130,8 @@
           "md5": "b947fc7b6dac078cc863223827e5c5f0",
           "size": 8862007457,
           "decompressed_size": 17727225856,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 8858370048
         }
       ],
       "patches": [
@@ -2242,7 +2253,8 @@
           "md5": "2686795437c83749e975333216d99edf",
           "size": 51134869445,
           "decompressed_size": 102273657078,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 51131585659
         },
         {
           "kind": "game",
@@ -2291,7 +2303,8 @@
           "md5": "69a082ebb35929d1392318c2c4ec045c",
           "size": 9626507183,
           "decompressed_size": 19273414084,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 9631464162
         },
         {
           "kind": "audio",
@@ -2300,7 +2313,8 @@
           "md5": "91efd98ed1eb3b39ab93588789d402da",
           "size": 11041923626,
           "decompressed_size": 22086617662,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 11038065951
         },
         {
           "kind": "audio",
@@ -2309,7 +2323,8 @@
           "md5": "565cb3fddbe213c49308749b44e9a562",
           "size": 12412394814,
           "decompressed_size": 24835396732,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 12412455486
         },
         {
           "kind": "audio",
@@ -2318,7 +2333,8 @@
           "md5": "7fc1859050f138fb13fe4eb6e2fb8573",
           "size": 9434740241,
           "decompressed_size": 18886867026,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 9438190633
         }
       ],
       "patches": [
@@ -2487,7 +2503,8 @@
           "md5": "2b0fd39275a2974fc85ee1e9735b42b7",
           "size": 10075896724,
           "decompressed_size": 20153882380,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 10071698310
         },
         {
           "kind": "audio",
@@ -2496,7 +2513,8 @@
           "md5": "43b360b3f5c71feb951a204f81a1d232",
           "size": 11583388687,
           "decompressed_size": 23181834322,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 11585674281
         },
         {
           "kind": "audio",
@@ -2505,7 +2523,8 @@
           "md5": "516ad9333520473c6ff3ac7fe6d1a5e9",
           "size": 13044193326,
           "decompressed_size": 26102412084,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 13045963162
         },
         {
           "kind": "audio",
@@ -2514,7 +2533,8 @@
           "md5": "07251fd076e60111716c4ca970965a87",
           "size": 9858003494,
           "decompressed_size": 19724385650,
-          "http_status": 200
+          "http_status": 200,
+          "md5_size": 9856949945
         }
       ],
       "patches": [
