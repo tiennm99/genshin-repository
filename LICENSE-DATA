@@ -1,0 +1,28 @@
+Data and README license
+
+The files in data/ and the content of README.md are licensed under the
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+License (CC BY-NC-SA 4.0):
+
+  https://creativecommons.org/licenses/by-nc-sa/4.0/
+  Full legal code: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+They include material adapted from these CC BY-NC-SA 4.0 works:
+
+  - JRSKelvin/GenshinRepository
+    https://github.com/JRSKelvin/GenshinRepository
+    (continuation of rapdodge/GenshinRepository,
+    https://github.com/rapdodge/GenshinRepository)
+  - JRSKelvin/Genshin-Repository-List
+    https://github.com/JRSKelvin/Genshin-Repository-List
+
+Changes made: the links were parsed from the per-version Markdown files,
+merged with the daily API snapshots and live API data, deduplicated, filed
+under the version named in each URL, and reformatted.
+
+The download URLs, checksums and sizes describe files published by
+HoYoverse; the game files themselves are HoYoverse's property and are not
+covered by this license or hosted here.
+
+The source code (everything else in this repository) is licensed under the
+Apache License 2.0; see LICENSE.
