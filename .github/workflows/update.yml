@@ -1,0 +1,66 @@
+name: Update
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: Probe older Sophon builds (5.6.0 and later) that are missing
+        type: boolean
+        default: false
+
+# GITHUB_TOKEN pushes do not trigger other workflows, so the bot commit
+# cannot start a loop.
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      CGO_ENABLED: '0'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      # CI does not run on bot commits, so test before writing data.
+      - name: Test
+        run: go test ./...
+
+      - name: Fetch
+        env:
+          BACKFILL: ${{ inputs.backfill || false }}
+        run: go run ./cmd/fetch -backfill="$BACKFILL"
+
+      - name: Commit changes
+        env:
+          BACKFILL: ${{ inputs.backfill || false }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # README.md and data/ are generated, so a rejected push is resolved
+          # by regenerating them on top of the new main.
+          for attempt in 1 2 3; do
+            git add README.md data/
+            if git diff --staged --quiet; then
+              echo "no changes"
+              exit 0
+            fi
+            git commit -m "chore(data): daily update"
+            if git push; then
+              exit 0
+            fi
+            echo "push attempt $attempt rejected, regenerating on origin/main"
+            git fetch origin main
+            git reset --hard origin/main
+            go run ./cmd/fetch -backfill="$BACKFILL"
+          done
+          exit 1

@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      CGO_ENABLED: '0'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v9
+        with:
+          version: latest
+
+      - name: Test
+        run: go test ./...
+
+      - name: Build
+        run: go build ./...
+
+      # README.md must match what the generator makes from data/versions.json.
+      - name: README is up to date
+        run: |
+          go run ./cmd/fetch -render-only
+          git diff --exit-code README.md
