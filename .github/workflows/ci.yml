@@ -34,8 +34,10 @@ jobs:
       - name: Build
         run: go build ./...
 
-      # README.md must match what the generator makes from data/versions.json.
-      - name: README is up to date
+      # README.md and docs/ must match what the generator makes from
+      # data/versions.json. `git add -N` makes new pages visible to git diff.
+      - name: Generated files are up to date
         run: |
           go run ./cmd/fetch -render-only
-          git diff --exit-code README.md
+          git add -N README.md docs
+          git diff --exit-code -- README.md docs
