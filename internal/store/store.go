@@ -63,6 +63,10 @@ type Package struct {
 	Size             int64  `json:"size,omitempty"`              // download bytes
 	DecompressedSize int64  `json:"decompressed_size,omitempty"` // unpacked bytes
 	HTTPStatus       int    `json:"http_status,omitempty"`       // last link check, 0 = never checked
+	// MD5Size is the size the API published together with MD5, set only
+	// when it differs from Size (the served Content-Length): the MD5 then
+	// likely describes another upload and may not match the served file.
+	MD5Size int64 `json:"md5_size,omitempty"`
 }
 
 // Patch holds the update archives from one older version.
@@ -265,6 +269,7 @@ func mergePackage(ex, p *Package) {
 	}
 	if p.MD5 != "" {
 		ex.MD5 = p.MD5
+		ex.MD5Size = 0
 	}
 	// A size read from a live HEAD answer (status 200) is the real
 	// Content-Length; snapshot sizes are sometimes a few MB off, so they do
@@ -272,12 +277,31 @@ func mergePackage(ex, p *Package) {
 	if p.Size != 0 && (ex.HTTPStatus != 200 || p.HTTPStatus == 200) {
 		ex.Size = p.Size
 	}
+	if p.MD5 != "" && p.Size != 0 && p.Size != ex.Size {
+		ex.MD5Size = p.Size
+	}
 	if p.DecompressedSize != 0 {
 		ex.DecompressedSize = p.DecompressedSize
 	}
 	if p.HTTPStatus != 0 {
 		ex.HTTPStatus = p.HTTPStatus
 	}
+}
+
+// SetServedSize records n, the Content-Length of a live HEAD answer, as
+// the size. When it differs from the size the MD5 was published with, that
+// size is kept in MD5Size.
+func (p *Package) SetServedSize(n int64) {
+	if n <= 0 || n == p.Size {
+		return
+	}
+	if p.MD5 != "" && p.MD5Size == 0 {
+		p.MD5Size = p.Size
+	}
+	if p.MD5Size == n {
+		p.MD5Size = 0
+	}
+	p.Size = n
 }
 
 // SetSophon replaces the Sophon build when b is non-empty.

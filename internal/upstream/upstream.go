@@ -150,7 +150,10 @@ var (
 // ParseMarkdown applies one "Version X.md" file. The version and language
 // of each link come from the URL file name, not the label: upstream labels
 // are sometimes wrong (1.5.0 swaps CN and KO, 1.6.1 relists 1.6.0 files).
-// A file is filed under the version its URL names.
+// A file is filed under the version its URL names. The one exception is a
+// hotfix page whose game archive names the X.Y.0 release it shares (1.6.1
+// lists GenshinImpact_1.6.0.zip as its game data): that archive is filed
+// under both versions, so the hotfix keeps a complete full install.
 func ParseMarkdown(s *store.Store, name string, content []byte) {
 	fileVer := store.NormalizeVersion(strings.TrimSuffix(strings.TrimPrefix(name, "Version "), ".md"))
 	sc := bufio.NewScanner(bytes.NewReader(content))
@@ -167,6 +170,9 @@ func ParseMarkdown(s *store.Store, name string, content []byte) {
 			g := reFullGame.FindStringSubmatch(u)
 			part, _ := strconv.Atoi(g[2])
 			add(s, g[1], "", &store.Package{Kind: store.KindGame, Part: part, URL: u})
+			if sharesRelease(fileVer, g[1]) {
+				add(s, fileVer, "", &store.Package{Kind: store.KindGame, Part: part, URL: u})
+			}
 		case reFullAud.MatchString(u):
 			g := reFullAud.FindStringSubmatch(u)
 			add(s, g[2], "", &store.Package{Kind: store.KindAudio, Language: langFile[g[1]], URL: u})
@@ -179,6 +185,13 @@ func ParseMarkdown(s *store.Store, name string, content []byte) {
 			add(s, g[3], g[2], p)
 		}
 	}
+}
+
+// sharesRelease reports whether hotfix is a later X.Y.Z of release's X.Y.
+func sharesRelease(hotfix, release string) bool {
+	hotfix, release = store.NormalizeVersion(hotfix), store.NormalizeVersion(release)
+	hp, rp := strings.Split(hotfix, "."), strings.Split(release, ".")
+	return hp[0] == rp[0] && hp[1] == rp[1] && store.CompareVersions(hotfix, release) > 0
 }
 
 func add(s *store.Store, ver, from string, p *store.Package) {
@@ -322,9 +335,7 @@ func CheckLinks(ctx context.Context, hc *http.Client, s *store.Store, workers in
 				case http.StatusOK:
 					live++
 					p.HTTPStatus = status
-					if length > 0 {
-						p.Size = length
-					}
+					p.SetServedSize(length)
 				case http.StatusNotFound, http.StatusGone:
 					dead++
 					p.HTTPStatus = status

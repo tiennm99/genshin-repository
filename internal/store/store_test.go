@@ -157,3 +157,31 @@ func TestCompareVersions(t *testing.T) {
 		t.Error("NormalizeVersion or Major")
 	}
 }
+
+func TestMD5SizeTracksPublishedSize(t *testing.T) {
+	// API first, then a HEAD answer with another size.
+	v := &Version{}
+	v.AddPackage("", &Package{Kind: KindAudio, URL: "a", MD5: "m1", Size: 100})
+	p := v.Full[0]
+	p.HTTPStatus = 200
+	p.SetServedSize(90)
+	if p.Size != 90 || p.MD5Size != 100 {
+		t.Errorf("after HEAD: size %d, md5 size %d", p.Size, p.MD5Size)
+	}
+	// The API repeats the old pair: the mismatch stays recorded.
+	v.AddPackage("", &Package{Kind: KindAudio, URL: "a", MD5: "m1", Size: 100})
+	if p.Size != 90 || p.MD5Size != 100 {
+		t.Errorf("after repeat: size %d, md5 size %d", p.Size, p.MD5Size)
+	}
+	// A new MD5 published for the served size clears it.
+	v.AddPackage("", &Package{Kind: KindAudio, URL: "a", MD5: "m2", Size: 90})
+	if p.MD5 != "m2" || p.MD5Size != 0 {
+		t.Errorf("after matching MD5: md5 %s, md5 size %d", p.MD5, p.MD5Size)
+	}
+	// A matching size from HEAD needs no note.
+	q := &Package{MD5: "m", Size: 5}
+	q.SetServedSize(5)
+	if q.MD5Size != 0 {
+		t.Errorf("equal sizes set md5 size %d", q.MD5Size)
+	}
+}

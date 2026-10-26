@@ -19,7 +19,8 @@ func read(t *testing.T, name string) []byte {
 	return b
 }
 
-// Upstream 1.6.1 relists 1.6.0 files; they belong to 1.6.0.
+// Upstream 1.6.1 relists 1.6.0 files; they belong to 1.6.0, except the
+// game archive, which the 1.6.1 hotfix shares.
 func TestParseMarkdownFilesLinksByURLVersion(t *testing.T) {
 	s := &store.Store{}
 	ParseMarkdown(s, "Version 1.6.1.md", read(t, "version-1.6.1.md"))
@@ -33,7 +34,7 @@ func TestParseMarkdownFilesLinksByURLVersion(t *testing.T) {
 	for _, p := range v161.Full {
 		kinds += p.Kind + ":" + p.Language + " "
 	}
-	if kinds != "launcher: audio:zh-cn audio:en-us " {
+	if kinds != "launcher: game: audio:zh-cn audio:en-us " {
 		t.Errorf("1.6.1 full = %q", kinds)
 	}
 
