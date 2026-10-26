@@ -153,9 +153,8 @@ a launcher. It covers `hk4e_global`, including full builds and patch builds.
 - **Sophon update ... (from X):** diff data that updates an install of
   version X (the diff tags). The Sophon API serves update data for the
   current version only, so older versions list the full build alone.
-- The Sophon API also answers for several zip-era 4.x and 5.x versions.
-  This list records Sophon builds from 5.6.0 on, where Sophon is the only
-  way to download.
+- Versions 4.2.0 to 5.5.0 list both their zip archives and their Sophon
+  full build. Earlier versions have no Sophon build.
 
 > The tools above are independent community projects. HoYoverse does not
 > endorse them, and this repository has no ties to them. Third-party
@@ -450,6 +449,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.3.0_5.5.0_hdiff_beYoljTPLiGPgFOz.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.3.0_5.5.0_hdiff_beYoljTPLiGPgFOz.zip) | Japanese voice-over | 810.74 MiB | `28f2866151a4f333bfa27db6a415ca73` |
 | [audio_ko-kr_5.3.0_5.5.0_hdiff_IuoBNsASjDzeqgNY.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.3.0_5.5.0_hdiff_IuoBNsASjDzeqgNY.zip) | Korean voice-over | 682.64 MiB | `a62129453431421ddb4fd6d4ee3f9413` |
 
+#### Sophon full build `wUcNY2SeSiQE`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 74.85 GiB | 76.74 GiB | 2124 | 71201 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/wUcNY2SeSiQE/manifest_d61d6fef51538643_0b857713683e97748c320184ad9048bc) |
+| Chinese voice-over | 13.01 GiB | 15.02 GiB | 161 | 14127 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/wUcNY2SeSiQE/manifest_ab0673dffd2afdb1_a887c821337a64d97ce6751bd85b3abf) |
+| English voice-over | 15.46 GiB | 17.15 GiB | 161 | 15539 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/wUcNY2SeSiQE/manifest_f67cb4385a052f1f_485143352632d8d353b19e7ab85a35f5) |
+| Japanese voice-over | 15.15 GiB | 19.50 GiB | 161 | 17398 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/wUcNY2SeSiQE/manifest_7b1dd149d8f2828a_626b84108286b233f48a3b8a6f33511c) |
+| Korean voice-over | 12.64 GiB | 14.80 GiB | 161 | 13294 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/wUcNY2SeSiQE/manifest_606858cbcfb9dd3d_40820e10d8f6e9d7ad990f5a7e72c1eb) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/wUcNY2SeSiQE`
+
 ### 5.4.0
 
 Seen in the API as the live version from 2025-02-12 to 2025-03-25, pre-download from 2025-02-10 (UTC).
@@ -492,6 +503,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_en-us_5.2.0_5.4.0_hdiff_PzaSwHqqvaxDVWHd.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_en-us_5.2.0_5.4.0_hdiff_PzaSwHqqvaxDVWHd.zip) | English voice-over | 1007.04 MiB | `abcb7389dcde8e19b086dbc19b597101` |
 | [audio_ja-jp_5.2.0_5.4.0_hdiff_JaDVQGJbqLlQwrjN.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.2.0_5.4.0_hdiff_JaDVQGJbqLlQwrjN.zip) | Japanese voice-over | 1.26 GiB | `dff50933e6d363879ef5334fcf895f06` |
 | [audio_ko-kr_5.2.0_5.4.0_hdiff_glXIlRCjmGCRUFmu.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.2.0_5.4.0_hdiff_glXIlRCjmGCRUFmu.zip) | Korean voice-over | 1.09 GiB | `830a4fa257297a01e9758989cec581dd` |
+
+#### Sophon full build `bd2sGNJRzBig`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 71.93 GiB | 73.83 GiB | 2069 | 68361 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/bd2sGNJRzBig/manifest_7843d63ff03857a4_ccb08c7415c8b47a95e6125efd602a50) |
+| Chinese voice-over | 12.73 GiB | 14.70 GiB | 158 | 13827 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/bd2sGNJRzBig/manifest_7120260feb130789_c3dd98ba907686c1749480ed4aa9f385) |
+| English voice-over | 15.13 GiB | 16.76 GiB | 158 | 15199 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/bd2sGNJRzBig/manifest_57f57e0f7234a831_2e22e0567360382e43e4eb24e5778638) |
+| Japanese voice-over | 14.83 GiB | 19.08 GiB | 158 | 17045 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/bd2sGNJRzBig/manifest_d5d8195bcae9e3aa_63cfc74808eaf6a99e6f48879858a118) |
+| Korean voice-over | 12.37 GiB | 14.48 GiB | 158 | 13001 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/bd2sGNJRzBig/manifest_b6295f5aa1e9f818_c0d4e7dac6ebf92c55e96a252fe3d254) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/bd2sGNJRzBig`
 
 ### 5.3.0
 
@@ -536,6 +559,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_5.1.0_5.3.0_hdiff_gsmDWqeCKRCyKocR.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.1.0_5.3.0_hdiff_gsmDWqeCKRCyKocR.zip) | Japanese voice-over | 1.09 GiB | `9d35e1a6dca5e89659e5a8e62ee72ec3` |
 | [audio_ko-kr_5.1.0_5.3.0_hdiff_ZNxbHFxkCPDnTaZZ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.1.0_5.3.0_hdiff_ZNxbHFxkCPDnTaZZ.zip) | Korean voice-over | 984.31 MiB | `8421256053f495379f1bef6247cb5cdc` |
 
+#### Sophon full build `I5l2OSxpfeZZ`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 71.18 GiB | 73.04 GiB | 2040 | 67617 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/I5l2OSxpfeZZ/manifest_9f7913f9d9abf279_94b7eed55c7145bf2187570c81289d94) |
+| Chinese voice-over | 12.31 GiB | 14.20 GiB | 157 | 13348 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/I5l2OSxpfeZZ/manifest_5c84619712c3ad79_4d5963a32dddf3437b7532236189ad75) |
+| English voice-over | 14.81 GiB | 16.24 GiB | 157 | 14771 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/I5l2OSxpfeZZ/manifest_e5a64d9e7f39dba0_c5664172b98573189ccc9e35e146a405) |
+| Japanese voice-over | 14.36 GiB | 18.44 GiB | 157 | 16477 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/I5l2OSxpfeZZ/manifest_e319bc8164a1abb2_7dc5be4d0a61fa254e1e69314197adeb) |
+| Korean voice-over | 11.97 GiB | 14.00 GiB | 157 | 12553 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/I5l2OSxpfeZZ/manifest_8cc1876541c9bd63_293cdb099756ec93fa891ab264e2cb3c) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/I5l2OSxpfeZZ`
+
 ### 5.2.0
 
 Seen in the API as the live version from 2024-11-20 to 2024-12-31, pre-download from 2024-11-18 (UTC).
@@ -577,6 +612,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_en-us_5.0.0_5.2.0_hdiff_FAoZwUpiPebLlqjz.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_en-us_5.0.0_5.2.0_hdiff_FAoZwUpiPebLlqjz.zip) | English voice-over | 852.78 MiB | `9c3d6b24a29884c8f5a78a24e955b2d4` |
 | [audio_ja-jp_5.0.0_5.2.0_hdiff_oQYCpQTDDuJqFLUM.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_5.0.0_5.2.0_hdiff_oQYCpQTDDuJqFLUM.zip) | Japanese voice-over | 917.86 MiB | `9e83a0cb36f3facdd555ec905df9fa5d` |
 | [audio_ko-kr_5.0.0_5.2.0_hdiff_UzYUcmxtPnkLSYLe.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_5.0.0_5.2.0_hdiff_UzYUcmxtPnkLSYLe.zip) | Korean voice-over | 806.79 MiB | `4e6a4c613273c3e0ae630ed5243719b3` |
+
+#### Sophon full build `UGwkWqY0r1PF`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 67.45 GiB | 69.21 GiB | 1974 | 64143 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/UGwkWqY0r1PF/manifest_c0ba7cc3dc8bec08_4dd93d60426654dd97afed58b92eba20) |
+| Chinese voice-over | 11.66 GiB | 13.42 GiB | 154 | 12555 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/UGwkWqY0r1PF/manifest_a47e543ac07f67d6_f0ca57b3324b5f55e0c32ef543d394d4) |
+| English voice-over | 14.19 GiB | 15.46 GiB | 154 | 14058 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/UGwkWqY0r1PF/manifest_b5b43dfcc36be30a_0707ece479e5e31b9282a4bda8a18bf6) |
+| Japanese voice-over | 13.58 GiB | 17.41 GiB | 154 | 15590 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/UGwkWqY0r1PF/manifest_fb4903b257ff4907_8ed7eb5e13ea23020dda9cb16f0b7723) |
+| Korean voice-over | 11.28 GiB | 13.17 GiB | 154 | 11826 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/UGwkWqY0r1PF/manifest_e97316cb8cc94f04_4fb3622aa9a0200371827baecf8193f1) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/UGwkWqY0r1PF`
 
 ### 5.1.0
 
@@ -620,6 +667,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_4.8.0_5.1.0_hdiff_SCCqvOQJFVpHQuqn.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_4.8.0_5.1.0_hdiff_SCCqvOQJFVpHQuqn.zip) | Japanese voice-over | 1.30 GiB | `23a0f5d02f259592c2dcfbe999aedeed` |
 | [audio_ko-kr_4.8.0_5.1.0_hdiff_xyLFEAxJPVfQIEdZ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_4.8.0_5.1.0_hdiff_xyLFEAxJPVfQIEdZ.zip) | Korean voice-over | 1.11 GiB | `ebe8365da2247a7bb26401fc1d9e63a0` |
 
+#### Sophon full build `1oeBHveoUGMI`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 66.15 GiB | 67.82 GiB | 1921 | 62866 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/1oeBHveoUGMI/manifest_31646113bc2809a1_0acf8c304efd46b504401ec15ccaf363) |
+| Chinese voice-over | 11.38 GiB | 13.09 GiB | 148 | 12240 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/1oeBHveoUGMI/manifest_8cdd876a75ba94e9_7aedd42ff984c4e9565ad7a1a88f70d3) |
+| English voice-over | 13.87 GiB | 15.09 GiB | 148 | 13734 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/1oeBHveoUGMI/manifest_2b9a7bcba9970f55_f8f7e36a6c2cdd5dd2c8f7ee533fb30d) |
+| Japanese voice-over | 13.28 GiB | 17.00 GiB | 148 | 15246 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/1oeBHveoUGMI/manifest_95d04aabe200d2dd_6bce89abaa58f351de1bc8d55e5a8736) |
+| Korean voice-over | 11.01 GiB | 12.84 GiB | 148 | 11542 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/1oeBHveoUGMI/manifest_9bd62bef9f14fa44_9c391ea3235c9eb0b464af97e3d78253) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/1oeBHveoUGMI`
+
 ### 5.0.0
 
 Seen in the API as the live version from 2024-08-28 to 2024-10-08, pre-download from 2024-08-26 (UTC).
@@ -661,6 +720,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_en-us_4.7.0_5.0.0_hdiff_peHdUQzpeMePNdRd.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_en-us_4.7.0_5.0.0_hdiff_peHdUQzpeMePNdRd.zip) | English voice-over | 1.17 GiB | `f2ada108661d82729d2aa6d5acb585ea` |
 | [audio_ja-jp_4.7.0_5.0.0_hdiff_IjbPGEoMTmdwazkV.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_4.7.0_5.0.0_hdiff_IjbPGEoMTmdwazkV.zip) | Japanese voice-over | 1.10 GiB | `1601befcfcd638cd7b4aed3091f28155` |
 | [audio_ko-kr_4.7.0_5.0.0_hdiff_jtnGBZilUVfWRxlB.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_4.7.0_5.0.0_hdiff_jtnGBZilUVfWRxlB.zip) | Korean voice-over | 939.50 MiB | `c71685deb67a733059d73072e1199b12` |
+
+#### Sophon full build `Xjsq5P6brXRg`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 63.98 GiB | 65.64 GiB | 1867 | 60826 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/Xjsq5P6brXRg/manifest_a840226e3d67bc2e_8553accd71b3242c98b3cbc0589825cc) |
+| Chinese voice-over | 12.85 GiB | 14.78 GiB | 147 | 13849 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/Xjsq5P6brXRg/manifest_12db83676041094b_79b0c9531869238d18d1aed942f4e8df) |
+| English voice-over | 15.88 GiB | 17.23 GiB | 147 | 15659 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/Xjsq5P6brXRg/manifest_2c66b4c53fce8d04_1ef9f276267d3bf6cb9dd5d90add28cd) |
+| Japanese voice-over | 15.11 GiB | 19.38 GiB | 147 | 17332 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/Xjsq5P6brXRg/manifest_878ea417c18d7f71_ddf2ae839f3c1feee40289ebe5050526) |
+| Korean voice-over | 12.43 GiB | 14.52 GiB | 147 | 13014 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/Xjsq5P6brXRg/manifest_574e527782907430_76ad89c6a303b9ad1a4289a1738cd104) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/Xjsq5P6brXRg`
 
 </details>
 
@@ -710,6 +781,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [audio_ja-jp_4.6.0_4.8.0_hdiff_jcwUMAzUnBmCDrEt.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ja-jp_4.6.0_4.8.0_hdiff_jcwUMAzUnBmCDrEt.zip) | Japanese voice-over | 977.84 MiB | `cb56ffa644747381c0d863ab18b79421` |
 | [audio_ko-kr_4.6.0_4.8.0_hdiff_dDPSxPwdcwUcIMsl.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/audio_ko-kr_4.6.0_4.8.0_hdiff_dDPSxPwdcwUcIMsl.zip) | Korean voice-over | 781.53 MiB | `fe4e5fe9b1d17bab4739371ce251e469` |
 
+#### Sophon full build `VvHG3LEx2pIg`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 58.73 GiB | 60.25 GiB | 1773 | 55884 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/T7Cp388t1alS/manifest_77b109c41e1cebea_a902ab6293668d904645e2f9f25ceec1) |
+| Chinese voice-over | 12.21 GiB | 14.05 GiB | 137 | 13165 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/T7Cp388t1alS/manifest_24d39f1f26acb8d6_d4544b12342b69e78a944178222e77f3) |
+| English voice-over | 15.13 GiB | 16.41 GiB | 137 | 14915 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/T7Cp388t1alS/manifest_094d0e77605f91b6_be6ae85a50e96444832c6ac7ca17917c) |
+| Japanese voice-over | 14.39 GiB | 18.41 GiB | 137 | 16472 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/T7Cp388t1alS/manifest_16f5a041a0b5e3a1_0c88453b008e0a80adf959fa736af37c) |
+| Korean voice-over | 11.83 GiB | 13.79 GiB | 137 | 12362 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/T7Cp388t1alS/manifest_65fb8caf62e0fac1_362333af9b72a2536708c17e9e89ac9e) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/T7Cp388t1alS`
+
 ### 4.7.0
 
 Seen in the API as the live version from 2024-06-05 to 2024-07-17, pre-download from 2024-06-03 (UTC).
@@ -751,6 +834,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.5.0_4.7.0_hdiff_GCOBxKrAuTwDXqeQ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.5.0_4.7.0_hdiff_GCOBxKrAuTwDXqeQ.zip) | Japanese voice-over | 918.34 MiB | `a6316c5733169a4f5b80a40cecc0653a` |
 | [ko-kr_4.5.0_4.7.0_hdiff_TVIabdjZRsfUn1B9.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.5.0_4.7.0_hdiff_TVIabdjZRsfUn1B9.zip) | Korean voice-over | 732.59 MiB | `ac8e76c4744dfc9e8cd8cb74bfe3ee44` |
 
+#### Sophon full build `XCzAV5gm1NLk`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 56.83 GiB | 58.31 GiB | 1252 | 53917 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/5lIK9SyXMxFv/manifest_961d28be314c0ccc_1fd51377fd91e1abc94c709c45877f97) |
+| Chinese voice-over | 11.86 GiB | 13.65 GiB | 135 | 12805 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/5lIK9SyXMxFv/manifest_6747030909656ea4_31d25f24672bd497d607354f05b01bd3) |
+| English voice-over | 14.71 GiB | 15.94 GiB | 135 | 14493 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/5lIK9SyXMxFv/manifest_a63aeaa86a0d7fc3_97e12eecc6496b2586495f709d418432) |
+| Japanese voice-over | 14.00 GiB | 17.90 GiB | 135 | 16009 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/5lIK9SyXMxFv/manifest_8f65af91258765c6_6d35188c0ddc968a386eca630b692514) |
+| Korean voice-over | 11.51 GiB | 13.40 GiB | 135 | 12020 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/5lIK9SyXMxFv/manifest_a40a96ca3da417fb_d52b0b705a963723c8f21191edc02083) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/5lIK9SyXMxFv`
+
 ### 4.6.0
 
 Seen in the API as the live version from 2024-04-24 to 2024-06-04, pre-download from 2024-04-22 (UTC).
@@ -791,6 +886,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [en-us_4.4.0_4.6.0_hdiff_yuFxY5cgThAqwWiU.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/en-us_4.4.0_4.6.0_hdiff_yuFxY5cgThAqwWiU.zip) | English voice-over | 851.41 MiB | `f875d21c3e3f4234437c037ae2e324fd` |
 | [ja-jp_4.4.0_4.6.0_hdiff_5VqBYzo3K6pfjhGd.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.4.0_4.6.0_hdiff_5VqBYzo3K6pfjhGd.zip) | Japanese voice-over | 705.16 MiB | `df3c9c8a089557ff184a9db14062e49f` |
 | [ko-kr_4.4.0_4.6.0_hdiff_M7chPZ8Dg2dIbtSf.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.4.0_4.6.0_hdiff_M7chPZ8Dg2dIbtSf.zip) | Korean voice-over | 573.81 MiB | `65b3756cd867abb3845d02fc6e388a88` |
+
+#### Sophon full build `L1mXN5eDsXPX`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 55.46 GiB | 56.90 GiB | 1194 | 52621 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/HKIbCxFpCgBH/manifest_b399430ba2d89195_dd992a3728a4915348da66db5e342324) |
+| Chinese voice-over | 11.35 GiB | 13.07 GiB | 131 | 12259 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/HKIbCxFpCgBH/manifest_9dc64fa6ad3790ab_e8aaf9f34ee9bdd61b8679d165f64200) |
+| English voice-over | 14.11 GiB | 15.29 GiB | 131 | 13879 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/HKIbCxFpCgBH/manifest_6e0057681cc6c233_5c512512e420d9a5c3b314d581c91e51) |
+| Japanese voice-over | 13.43 GiB | 17.13 GiB | 131 | 15326 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/HKIbCxFpCgBH/manifest_af8c852e318088eb_ce989148b14475e0263a8b8b830c4465) |
+| Korean voice-over | 11.06 GiB | 12.85 GiB | 131 | 11535 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/HKIbCxFpCgBH/manifest_c47cdefe47df734d_5faec445f228c6d3344bbcfb08b9e937) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/HKIbCxFpCgBH`
 
 ### 4.5.0
 
@@ -835,6 +942,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.3.0_4.5.0_hdiff_NS9Ju75gDp0ybfFO.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.3.0_4.5.0_hdiff_NS9Ju75gDp0ybfFO.zip) | Japanese voice-over | 806.36 MiB | `1ae45dadd301042545deb615cb187cfa` |
 | [ko-kr_4.3.0_4.5.0_hdiff_icrsofHZMBLgj6em.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.3.0_4.5.0_hdiff_icrsofHZMBLgj6em.zip) | Korean voice-over | 652.73 MiB | `d4d7c4127f2ff97b602803119387a397` |
 
+#### Sophon full build `7iR4iHvoti1l`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 70.32 GiB | 71.48 GiB | 16115 | 74166 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/lz4b05w1EZYK/manifest_2527e9b20557b926_f4d4f5cc0141b362734cd4144419ff6c) |
+| Chinese voice-over | 11.04 GiB | 12.73 GiB | 129 | 11952 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/lz4b05w1EZYK/manifest_97a47818c4fd2063_6183a1be8705767bde69c77914dd6c17) |
+| English voice-over | 13.72 GiB | 14.86 GiB | 129 | 13500 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/lz4b05w1EZYK/manifest_7ddec138364c2d64_86874b3bb57f0f189b44e1266d824039) |
+| Japanese voice-over | 13.11 GiB | 16.68 GiB | 129 | 14959 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/lz4b05w1EZYK/manifest_8c4cfef3573c1aa8_455d43cca18b54388ac3cccc761b44d9) |
+| Korean voice-over | 10.80 GiB | 12.51 GiB | 129 | 11244 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/lz4b05w1EZYK/manifest_04d2d38bdfe14fc8_a4fdcedea2f844885c14e212b1f406c4) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/lz4b05w1EZYK`
+
 ### 4.4.0
 
 Seen in the API as the live version from 2024-01-31 to 2024-03-12, pre-download from 2024-01-29 (UTC).
@@ -877,6 +996,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [ja-jp_4.2.0_4.4.0_hdiff_pXCWv90ckibjMDZS.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.2.0_4.4.0_hdiff_pXCWv90ckibjMDZS.zip) | Japanese voice-over | 833.14 MiB | `c46f853d18f676b522c4afe2965222d8` |
 | [ko-kr_4.2.0_4.4.0_hdiff_CADJ8w3uMhLEPlGO.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.2.0_4.4.0_hdiff_CADJ8w3uMhLEPlGO.zip) | Korean voice-over | 664.29 MiB | `54022b9fb8fdf6eb16b65a52106dec12` |
 
+#### Sophon full build `N14cWLpKlRth`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 69.92 GiB | 71.08 GiB | 15854 | 73688 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/QqSf0qPuN1kj/manifest_b1b565efc2c60ab0_4b4f97a4d350620dc46146176854d6b9) |
+| Chinese voice-over | 10.75 GiB | 12.39 GiB | 126 | 11617 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/QqSf0qPuN1kj/manifest_2efdd7125181ed0b_60a5f45f4d527a380b62c4e2a202aee1) |
+| English voice-over | 13.27 GiB | 14.38 GiB | 126 | 13065 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/QqSf0qPuN1kj/manifest_8dab0558e7dd544f_5922c3e1ae7fefce48ccbc26c1d9d31c) |
+| Japanese voice-over | 12.75 GiB | 16.21 GiB | 126 | 14556 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/QqSf0qPuN1kj/manifest_f1f4875f46c7c9e7_076cb4ad741456b1137d110d32d576c7) |
+| Korean voice-over | 10.51 GiB | 12.15 GiB | 126 | 10911 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/QqSf0qPuN1kj/manifest_4d4aa09ed112515c_b83c6725bd56cebcc28b33d10ebf192b) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/QqSf0qPuN1kj`
+
 ### 4.3.0
 
 Seen in the API as the live version from 2023-12-20 to 2024-01-30, pre-download from 2023-12-18 (UTC).
@@ -918,6 +1049,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [en-us_4.1.0_4.3.0_hdiff_ViRbAxKhFm5ZM76s.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/en-us_4.1.0_4.3.0_hdiff_ViRbAxKhFm5ZM76s.zip) | English voice-over | 1010.15 MiB | `fa69771fce60439157493866863e7742` |
 | [ja-jp_4.1.0_4.3.0_hdiff_gbIDuPQWRrc12NeO.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.1.0_4.3.0_hdiff_gbIDuPQWRrc12NeO.zip) | Japanese voice-over | 924.06 MiB | `ff2a2351d5351b435d3120b83ea9ddfe` |
 | [ko-kr_4.1.0_4.3.0_hdiff_qgPnM26ijOAyFsoJ.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.1.0_4.3.0_hdiff_qgPnM26ijOAyFsoJ.zip) | Korean voice-over | 777.89 MiB | `65f596ff107f540f9a386c96998a7094` |
+
+#### Sophon full build `68tlMKPDZYiG`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 66.22 GiB | 67.37 GiB | 14925 | 69755 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/YAsZavvwBQru/manifest_c45cc1d0810a6b88_84de7647d7544104a6e3b66da1a19ff9) |
+| Chinese voice-over | 10.38 GiB | 11.98 GiB | 125 | 11241 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/YAsZavvwBQru/manifest_d9a10d9cb7fe71f7_e2bd0c17e44378231203b2e7c15bad95) |
+| English voice-over | 12.80 GiB | 13.86 GiB | 125 | 12589 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/YAsZavvwBQru/manifest_9340d07af07bac91_efe14b6d76410526911d3dcc62aef099) |
+| Japanese voice-over | 12.32 GiB | 15.65 GiB | 125 | 14044 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/YAsZavvwBQru/manifest_df97405ccc1dd4ca_51769093951e828299f36617405bd8eb) |
+| Korean voice-over | 10.16 GiB | 11.74 GiB | 125 | 10532 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/YAsZavvwBQru/manifest_5d286a7022babffd_d81e176160752463bc44e34984378aa3) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/YAsZavvwBQru`
 
 ### 4.2.0
 
@@ -971,6 +1114,18 @@ Scattered files: `https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20
 | [en-us_4.0.0_4.2.0_hdiff_tFGfxP61Nwo30zhE.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/en-us_4.0.0_4.2.0_hdiff_tFGfxP61Nwo30zhE.zip) | English voice-over | 1.24 GiB | `edc1418021d195b8bde3a2780362435d` |
 | [ja-jp_4.0.0_4.2.0_hdiff_p7aB1CtbmGrwPUXy.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ja-jp_4.0.0_4.2.0_hdiff_p7aB1CtbmGrwPUXy.zip) | Japanese voice-over | 1.16 GiB | `35f2f08a2987cdaaabea65448cbbac07` |
 | [ko-kr_4.0.0_4.2.0_hdiff_kKGcq40lE9WOJpBy.zip](https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_4.0.0_4.2.0_hdiff_kKGcq40lE9WOJpBy.zip) | Korean voice-over | 1012.02 MiB | `fc64082d6c4e64e3619ff9fbe9aa4789` |
+
+#### Sophon full build `2fTGwbrbGYGz`
+
+| Content | Download | Installed | Files | Chunks | Manifest |
+| --- | --- | --- | --- | --- | --- |
+| Game | 65.06 GiB | 66.15 GiB | 14786 | 68596 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/A7MXB8KyIJQg/manifest_b142c9f962d5da2c_41726ac4de910b1bb494cb01646c330f) |
+| Chinese voice-over | 10.07 GiB | 11.62 GiB | 124 | 10918 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/A7MXB8KyIJQg/manifest_a4d834513d662fff_45b63e25dbbbcdf3817079ddb865f4e7) |
+| English voice-over | 12.38 GiB | 13.40 GiB | 124 | 12184 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/A7MXB8KyIJQg/manifest_7641caccd18d7f15_30d5a00fec03137c042d064a05ef1b8b) |
+| Japanese voice-over | 11.94 GiB | 15.15 GiB | 124 | 13606 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/A7MXB8KyIJQg/manifest_b90e16096801a540_c6e90355db2dd6bd495ca7d5e312a936) |
+| Korean voice-over | 9.86 GiB | 11.38 GiB | 124 | 10196 | [manifest](https://autopatchhk.yuanshen.com/client_app/sophon/manifests/cxhpq4g4rgg0/A7MXB8KyIJQg/manifest_21ae64b60e8b7a75_86a55eaf1442560e24c270c606a9ad78) |
+
+Chunk URL prefix: `https://autopatchhk.yuanshen.com/client_app/sophon/chunks/cxhpq4g4rgg0/A7MXB8KyIJQg`
 
 ### 4.1.0
 
