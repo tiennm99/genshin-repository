@@ -6,9 +6,10 @@ HoYoverse published these versions as zip archives. Each version below has:
 - **Full install:** the game archive, split into numbered parts
   (`.zip.001`, `.zip.002`, ...) for newer versions, plus one archive per
   voice-over language.
-- **Update from X (pre-install):** smaller archives that update an
-  existing install of version X. They hold hdiff patch files that a
-  launcher or patch tool applies to the old files, not a full game.
+- **Update from X:** smaller archives that update an existing install of
+  version X. They hold hdiff patch files that a launcher or patch tool
+  applies to the old files, not a full game. The upstream lists call
+  them pre-install files.
 
 Steps for a full install:
 
@@ -16,12 +17,22 @@ Steps for a full install:
    JDownloader, or `aria2c -x 16 -s 16 <url>`). Download every game part and
    the voice-over packs you want into one folder.
 2. Check each file against the MD5 in the table: `certutil -hashfile <file> MD5`
-   on Windows, `md5sum <file>` on Linux and macOS.
+   on Windows, `md5sum <file>` on Linux and macOS. Where the table says the
+   MD5 was published for another size, the served file changed after the
+   API listed it, and its MD5 is unknown.
 3. Extract the game archive. For a split archive, open the `.zip.001` file
    with 7-Zip, which joins the parts. Extract the voice-over packs into the
    same folder.
 
 Some old archives are no longer served; they are marked as dead links.
+
+### Single files: ScatteredFiles
+
+Releases that list a scattered-files URL (`res_list_url`) offer one more
+route. Below that URL, `pkg_version` is a JSON-lines list of every game
+file (`remoteName`, `md5`, `fileSize`). Each file can be downloaded on its own from
+`<res_list_url>/<remoteName>`, which helps to repair a single file without
+the full archive. HoYoverse may remove these URLs at any time.
 
 ## How to download 5.6 and later
 
@@ -30,9 +41,12 @@ HoYoverse stopped publishing full-game and patch zip archives after
 through **Sophon**. In Sophon the game is split into small compressed
 chunks, and a manifest lists them. Downloaders fetch the manifest and the
 chunks, then rebuild the game files on your disk. There are no direct
-download links to share for 5.6 and later. Each version entry below instead
-lists the Sophon manifests, the chunk URL prefix, the sizes and the diff
-tags. Any Sophon-aware tool below can use them.
+download links to share for 5.6 and later. The launchers below install the
+current version from the API. Each version entry below lists the Sophon
+manifests, the chunk URL prefix, the sizes and the diff tags. They are for
+reference and for tools or scripts that rebuild files from a Sophon
+manifest. This repository does not claim that older builds can be installed
+with these launchers.
 
 ### Official route: HoYoPlay (Windows)
 
@@ -106,14 +120,9 @@ a launcher. It covers `hk4e_global`, including full builds and patch builds.
 - **Sophon update ... (from X):** diff data that updates an install of
   version X (the diff tags). The Sophon API serves update data for the
   current version only, so older versions list the full build alone.
-
-### Single files: ScatteredFiles
-
-Each zip-era release also has a scattered-files URL (`res_list_url`). Below
-it, `pkg_version` is a JSON-lines list of every game file (`remoteName`,
-`md5`, `fileSize`). Each file can be downloaded on its own from
-`<res_list_url>/<remoteName>`, which helps to repair a single file without
-the full archive. HoYoverse may remove these URLs at any time.
+- The Sophon API also answers for several zip-era 4.x and 5.x versions.
+  This list records Sophon builds from 5.6.0 on, where Sophon is the only
+  way to download.
 
 > The tools above are independent community projects. HoYoverse does not
 > endorse them, and this repository has no ties to them. Third-party

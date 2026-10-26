@@ -98,6 +98,17 @@ func writeVersions(b *strings.Builder, s *store.Store) {
 			rng = lo + " to " + hi
 		}
 		fmt.Fprintf(b, "\n<details>\n<summary><b>Version %s.x</b>: %s (%s)</summary>\n", m, rng, count)
+		if len(vs) > 1 {
+			b.WriteString("\nJump to:")
+			for i := len(vs) - 1; i >= 0; i-- {
+				sep := " ·"
+				if i == len(vs)-1 {
+					sep = ""
+				}
+				fmt.Fprintf(b, "%s [%s](#%s)", sep, vs[i].Version, anchor(versionTitle(vs[i], live, pre)))
+			}
+			b.WriteString("\n")
+		}
 		for i := len(vs) - 1; i >= 0; i-- {
 			writeVersion(b, vs[i], live, pre)
 		}
@@ -105,15 +116,33 @@ func writeVersions(b *strings.Builder, s *store.Store) {
 	}
 }
 
-func writeVersion(b *strings.Builder, v *store.Version, live, pre string) {
-	title := v.Version
+func versionTitle(v *store.Version, live, pre string) string {
 	switch v.Version {
 	case live:
-		title += " (live)"
+		return v.Version + " (live)"
 	case pre:
-		title += " (pre-download)"
+		return v.Version + " (pre-download)"
 	}
-	fmt.Fprintf(b, "\n### %s\n\n", title)
+	return v.Version
+}
+
+// anchor is the id GitHub gives a heading: lower case, spaces to hyphens,
+// other punctuation dropped.
+func anchor(title string) string {
+	var b strings.Builder
+	for _, r := range strings.ToLower(title) {
+		switch {
+		case r >= 'a' && r <= 'z', r >= '0' && r <= '9', r == '-', r == '_':
+			b.WriteRune(r)
+		case r == ' ':
+			b.WriteRune('-')
+		}
+	}
+	return b.String()
+}
+
+func writeVersion(b *strings.Builder, v *store.Version, live, pre string) {
+	fmt.Fprintf(b, "\n### %s\n\n", versionTitle(v, live, pre))
 	if d := dates(v, v.Version == live); d != "" {
 		b.WriteString(d + "\n\n")
 	}
@@ -124,12 +153,18 @@ func writeVersion(b *strings.Builder, v *store.Version, live, pre string) {
 	if len(v.Full) > 0 {
 		b.WriteString("#### Full install\n\n")
 		writePackages(b, v.Full)
+		for _, p := range v.Full {
+			if p.Kind == store.KindGame && !strings.Contains(path.Base(p.URL), "_"+v.Version+".") {
+				fmt.Fprintf(b, "\nThe game archive `%s` is named for an earlier release: upstream lists it as the %s game data.\n", path.Base(p.URL), v.Version)
+				break
+			}
+		}
 		if v.ResListURL != "" {
 			fmt.Fprintf(b, "\nScattered files: `%s` (file list in `pkg_version`).\n", v.ResListURL)
 		}
 	}
 	for _, p := range v.Patches {
-		fmt.Fprintf(b, "\n#### Update from %s (pre-install)\n\n", p.From)
+		fmt.Fprintf(b, "\n#### Update from %s\n\n", p.From)
 		writePackages(b, p.Packages)
 	}
 	if v.Sophon != nil {
@@ -174,6 +209,9 @@ func writePackages(b *strings.Builder, ps []*store.Package) {
 		md5 := ""
 		if p.MD5 != "" {
 			md5 = "`" + p.MD5 + "`"
+		}
+		if p.MD5Size != 0 {
+			md5 += fmt.Sprintf(" (published for %d bytes; the served file is %d bytes, so it may not match)", p.MD5Size, p.Size)
 		}
 		fmt.Fprintf(b, "| %s | %s | %s | %s |\n", link, content(p, parts), size(p.Size), md5)
 	}
