@@ -88,8 +88,9 @@ a launcher. It covers `hk4e_global`, including full builds and patch builds.
 - **Sophon update ... (from X):** diff data that updates an install of
   version X (the diff tags). The Sophon API serves update data for the
   current version only, so older versions list the full build alone.
-- Versions 4.2.0 to 5.5.0 list both their zip archives and their Sophon
-  full build. Earlier versions have no Sophon build.
+- Versions that still shipped zip archives when Sophon appeared list both
+  their archives and their Sophon full build. Versions with no recorded
+  build show `—` in the Sophon column of the index.
 
 > The tools on this page are independent community projects. HoYoverse does
 > not endorse them, and this repository has no ties to them. Third-party
