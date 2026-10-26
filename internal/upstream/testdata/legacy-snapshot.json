@@ -1,0 +1,8 @@
+{"retcode":0,"message":"OK","data":{
+ "game":{"latest":{"version":"3.6.0","path":"","md5":"","package_size":"0","size":"0","decompressed_path":"https://example.invalid/3.6.0/ScatteredFiles",
+   "segments":[{"path":"https://example.invalid/GenshinImpact_3.6.0.zip.001","md5":"AA11","package_size":"10737418240"}],
+   "voice_packs":[{"language":"zh-cn","path":"https://example.invalid/Audio_Chinese_3.6.0.zip","md5":"bb22","package_size":"100","size":"200"}]},
+  "diffs":[{"version":"3.5.0","path":"https://example.invalid/game_3.5.0_3.6.0_hdiff_x.zip","md5":"cc33","package_size":"50","size":"80",
+   "voice_packs":[{"language":"en-us","path":"https://example.invalid/en-us_3.5.0_3.6.0_hdiff_y.zip","md5":"dd44","package_size":"5","size":"9"}]}]},
+ "pre_download_game":{"latest":{"version":"3.7.0","path":"https://example.invalid/GenshinImpact_3.7.0.zip","md5":"ee55","package_size":"300","size":"600","segments":[],"voice_packs":[]},"diffs":[]},
+ "plugin":{},"sdk":null,"web_url":"","force_update":null,"deprecated_packages":[],"deprecated_files":[]}}
