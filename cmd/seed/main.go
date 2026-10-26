@@ -1,7 +1,8 @@
 // Command seed imports the upstream history (JRSKelvin/GenshinRepository
 // and JRSKelvin/Genshin-Repository-List, at pinned commits) into
-// data/versions.json and regenerates README.md. It is a one-off: the daily
-// job never re-reads upstream. Running it again merges the same data.
+// data/versions.json and regenerates README.md and docs/versions/. It is a
+// one-off: the daily job never re-reads upstream. Running it again merges
+// the same data.
 //
 //	go run ./cmd/seed
 //	go run ./cmd/seed -check-links=false
@@ -16,27 +17,27 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/tiennm99/genshin-repository/internal/readme"
+	"github.com/tiennm99/genshin-repository/internal/render"
 	"github.com/tiennm99/genshin-repository/internal/store"
 	"github.com/tiennm99/genshin-repository/internal/upstream"
 )
 
 func main() {
 	dataPath := flag.String("data", "data/versions.json", "version store")
-	readmePath := flag.String("readme", "README.md", "README to generate")
+	out := flag.String("out", ".", "repository root that receives README.md and docs/versions/")
 	checkLinks := flag.Bool("check-links", true, "HEAD every archive URL to record dead links and real sizes")
 	workers := flag.Int("workers", 16, "parallel link checks")
 	flag.Parse()
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
-	err := run(ctx, *dataPath, *readmePath, *checkLinks, *workers)
+	err := run(ctx, *dataPath, *out, *checkLinks, *workers)
 	stop()
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func run(ctx context.Context, dataPath, readmePath string, checkLinks bool, workers int) error {
+func run(ctx context.Context, dataPath, out string, checkLinks bool, workers int) error {
 	s, err := store.Load(dataPath)
 	if err != nil {
 		return err
@@ -66,5 +67,9 @@ func run(ctx context.Context, dataPath, readmePath string, checkLinks bool, work
 	if err := s.Save(dataPath); err != nil {
 		return err
 	}
-	return os.WriteFile(readmePath, []byte(readme.Render(s)), 0o644)
+	files, err := render.Render(s)
+	if err != nil {
+		return err
+	}
+	return render.Write(out, files)
 }

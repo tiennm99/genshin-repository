@@ -1,0 +1,82 @@
+{{- $live := "none" }}{{ with .Live }}{{ $live = .Version }}{{ end -}}
+{{- $zip := "" }}{{ with .Zip }}{{ $zip = .Version }}{{ end -}}
+# Genshin Impact Repository
+
+[![Update](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml/badge.svg)](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml)
+![Live {{ $live }}]({{ shield "live" $live "blue" }})
+![{{ .Count }} versions]({{ shield "versions" (print .Count) "informational" }})
+![Last checked {{ .Date }}]({{ shield "last checked" .Date "success" }})
+[![Data license CC BY-NC-SA 4.0]({{ shield "data" "CC BY-NC-SA 4.0" "lightgrey" }})](LICENSE-DATA)
+
+Direct download links and Sophon build data for every Genshin Impact version on the
+global PC client, from {{ .Oldest }} to {{ $live }}. A GitHub Actions job checks the official
+HoYoverse API every day and keeps this list and [data/versions.json](data/versions.json)
+current. Every link points to HoYoverse's own servers; this repository hosts no game
+files, and HoYoverse does not endorse it.
+
+## Latest
+
+| | Version | Live in API (UTC) | Links |
+| --- | --- | --- | --- |
+{{ range .Latest }}| {{ .Label }} | {{ .Version }} | {{ .Dates }} | {{ .Link }} |
+{{ end }}
+Every version, by major:
+{{- range $i, $m := .Majors }}{{ if $i }} ·{{ end }} [{{ $m.N }}.x]({{ $m.Path }}){{ end }}
+
+## How to download
+
+{{ with .Zip -}}
+- **{{ .Version }} and earlier:** zip archives. Fetch them with a download manager, check
+  each against its MD5 and extract with 7-Zip. See the [download guide](docs/download-guide.md).
+- **After {{ .Version }}:** HoYoverse ships the game only as Sophon chunks, so there are no
+  direct links. Install it with HoYoPlay or a community launcher. See [Sophon](docs/sophon.md).
+{{- end }}
+
+## Versions
+
+Newest first. Expand a major version for its index; each version links to its full
+tables (file links, MD5s, Sophon manifests) on that major's page.
+
+"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
+not the release date. The checks cover {{ .Coverage }};
+`—` means no check saw the version.
+{{ range .Majors }}
+<details>
+<summary><b>Version {{ .N }}.x</b>: {{ .Range }} · <a href="{{ .Path }}">full page</a></summary>
+
+{{ versionIndex . .Path }}
+</details>
+{{ end }}
+## Data
+
+[data/versions.json](data/versions.json) is the single source for this README and the
+pages under [docs/versions/](docs/versions/): every version, archive, checksum, size, link
+status and Sophon manifest, merged from the upstream history and the live API. It only
+grows, so links that leave the API stay listed. Format and field meanings:
+[docs/data.md](docs/data.md).
+
+## Credits
+
+This repository continues the work of:
+
+- [JRSKelvin/GenshinRepository](https://github.com/JRSKelvin/GenshinRepository):
+  one link list per version. The 1.3 to 5.5 links here come from it.
+- [JRSKelvin/Genshin-Repository-List](https://github.com/JRSKelvin/Genshin-Repository-List):
+  a daily GitHub Action that saves the HoYoverse API answer. Its snapshots supply the
+  checksums, the sizes and the 2023 to 2025 dates.
+- [rapdodge/GenshinRepository](https://github.com/rapdodge/GenshinRepository):
+  the original repository, which JRSKelvin continued after it was archived.
+
+This repository keeps both ideas in one place: the history in one data file, and a Go
+program that updates it and these pages from the API each day.
+
+## License
+
+Code (the Go fetcher and generator): [Apache License 2.0](LICENSE). The data in
+[data/](data/) and the content of this README and [docs/](docs/):
+[CC BY-NC-SA 4.0](LICENSE-DATA), the license of the upstream lists they build on.
+
+---
+
+Last checked: {{ .Date }} (UTC). Generated from [data/versions.json](data/versions.json) by
+`go run ./cmd/fetch`; do not edit by hand.

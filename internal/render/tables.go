@@ -1,129 +1,19 @@
-// Package readme renders README.md from the store. The output depends only
-// on the store, so unchanged data gives a byte-identical README.
-package readme
+package render
 
 import (
-	_ "embed"
 	"fmt"
+	"net/url"
 	"path"
-	"slices"
-	"strconv"
 	"strings"
 
 	"github.com/tiennm99/genshin-repository/internal/store"
 )
-
-//go:embed intro.md
-var intro string
-
-//go:embed guide.md
-var guide string
 
 var langName = map[string]string{
 	"zh-cn": "Chinese",
 	"en-us": "English",
 	"ja-jp": "Japanese",
 	"ko-kr": "Korean",
-}
-
-// Render returns the README for s.
-func Render(s *store.Store) string {
-	s.Normalize()
-	var b strings.Builder
-	b.WriteString(intro)
-	writeLatest(&b, s)
-	b.WriteString(guide)
-	writeVersions(&b, s)
-	writeFooter(&b, s)
-	return b.String()
-}
-
-func writeLatest(b *strings.Builder, s *store.Store) {
-	live, pre, zip := latest(s)
-	b.WriteString("\n## Latest\n\n| | Version |\n| --- | --- |\n")
-	row := func(label, v string) {
-		if v == "" {
-			v = "none"
-		}
-		fmt.Fprintf(b, "| %s | %s |\n", label, v)
-	}
-	row("Live version", live)
-	row("Pre-download", pre)
-	row("Newest version with zip archives", zip)
-}
-
-// latest returns the live version, the open pre-download and the newest
-// version that has full zip archives.
-func latest(s *store.Store) (live, pre, zip string) {
-	var liveSeen string
-	for _, v := range s.Versions {
-		if v.MainLastSeen != "" && v.MainLastSeen >= liveSeen {
-			live, liveSeen = v.Version, v.MainLastSeen
-		}
-		if len(v.Full) > 0 {
-			zip = v.Version
-		}
-	}
-	today := s.LatestDate()
-	for _, v := range s.Versions {
-		if v.PreDownloadLastSeen == today && v.MainLastSeen < today {
-			pre = v.Version
-		}
-	}
-	return live, pre, zip
-}
-
-func writeVersions(b *strings.Builder, s *store.Store) {
-	b.WriteString("\n## Versions\n\nNewest first. Expand a major version to see its releases and links. Dates are the days a\nversion was seen in the API: up to 5.5.0 from the upstream daily snapshots, and from\n7.1.0 on from this repository's daily check.\n")
-	var majors []string
-	byMajor := map[string][]*store.Version{}
-	for _, v := range s.Versions {
-		m := store.Major(v.Version)
-		if _, ok := byMajor[m]; !ok {
-			majors = append(majors, m)
-		}
-		byMajor[m] = append(byMajor[m], v)
-	}
-	slices.SortFunc(majors, func(a, c string) int { return store.CompareVersions(c, a) })
-	live, pre, _ := latest(s)
-	for _, m := range majors {
-		vs := byMajor[m]
-		lo, hi := vs[0].Version, vs[len(vs)-1].Version
-		count := "1 version"
-		if len(vs) > 1 {
-			count = strconv.Itoa(len(vs)) + " versions"
-		}
-		rng := lo
-		if lo != hi {
-			rng = lo + " to " + hi
-		}
-		fmt.Fprintf(b, "\n<details>\n<summary><b>Version %s.x</b>: %s (%s)</summary>\n", m, rng, count)
-		if len(vs) > 1 {
-			b.WriteString("\nJump to:")
-			for i := len(vs) - 1; i >= 0; i-- {
-				sep := " ·"
-				if i == len(vs)-1 {
-					sep = ""
-				}
-				fmt.Fprintf(b, "%s [%s](#%s)", sep, vs[i].Version, anchor(versionTitle(vs[i], live, pre)))
-			}
-			b.WriteString("\n")
-		}
-		for i := len(vs) - 1; i >= 0; i-- {
-			writeVersion(b, vs[i], live, pre)
-		}
-		b.WriteString("\n</details>\n")
-	}
-}
-
-func versionTitle(v *store.Version, live, pre string) string {
-	switch v.Version {
-	case live:
-		return v.Version + " (live)"
-	case pre:
-		return v.Version + " (pre-download)"
-	}
-	return v.Version
 }
 
 // anchor is the id GitHub gives a heading: lower case, spaces to hyphens,
@@ -141,21 +31,38 @@ func anchor(title string) string {
 	return b.String()
 }
 
-func writeVersion(b *strings.Builder, v *store.Version, live, pre string) {
-	fmt.Fprintf(b, "\n### %s\n\n", versionTitle(v, live, pre))
-	if d := dates(v, v.Version == live); d != "" {
-		b.WriteString(d + "\n\n")
+// shield is a static shields.io badge URL. Its text comes from the store, so
+// the Markdown stays deterministic.
+func shield(label, msg, color string) string {
+	esc := func(s string) string {
+		s = strings.NewReplacer("-", "--", "_", "__").Replace(s)
+		return strings.ReplaceAll(url.PathEscape(s), "+", "%2B")
 	}
+	return "https://img.shields.io/badge/" + esc(label) + "-" + esc(msg) + "-" + color
+}
+
+// writeIndex writes the one-row-per-version table; prefix is the page the
+// version anchors live on ("" for the same page).
+func writeIndex(b *strings.Builder, rows []row, prefix string) {
+	b.WriteString("| Version | Live in API (UTC) | Game zip | Sophon | Notes |\n| --- | --- | --- | --- | --- |\n")
+	for _, r := range rows {
+		fmt.Fprintf(b, "| [%s](%s#%s) | %s | %s | %s | %s |\n", r.Version, prefix, anchor(r.Version), r.Dates, r.Zip, r.Sophon, r.Notes)
+	}
+}
+
+// writeVersion writes the full detail section of one version.
+func writeVersion(b *strings.Builder, v *store.Version, p *page) {
+	fmt.Fprintf(b, "## %s\n\n%s\n\n", v.Version, status(v, p))
 	if !v.HasZip() && v.Sophon == nil {
 		b.WriteString("No download data recorded.\n")
 		return
 	}
 	if len(v.Full) > 0 {
-		b.WriteString("#### Full install\n\n")
+		b.WriteString("### Full install\n\n")
 		writePackages(b, v.Full)
-		for _, p := range v.Full {
-			if p.Kind == store.KindGame && !strings.Contains(path.Base(p.URL), "_"+v.Version+".") {
-				fmt.Fprintf(b, "\nThe game archive `%s` is named for an earlier release: upstream lists it as the %s game data.\n", path.Base(p.URL), v.Version)
+		for _, pk := range v.Full {
+			if pk.Kind == store.KindGame && !strings.Contains(path.Base(pk.URL), "_"+v.Version+".") {
+				fmt.Fprintf(b, "\nThe game archive `%s` is named for an earlier release: upstream lists it as the %s game data.\n", path.Base(pk.URL), v.Version)
 				break
 			}
 		}
@@ -163,9 +70,9 @@ func writeVersion(b *strings.Builder, v *store.Version, live, pre string) {
 			fmt.Fprintf(b, "\nScattered files: `%s` (file list in `pkg_version`).\n", v.ResListURL)
 		}
 	}
-	for _, p := range v.Patches {
-		fmt.Fprintf(b, "\n#### Update from %s\n\n", p.From)
-		writePackages(b, p.Packages)
+	for _, pt := range v.Patches {
+		fmt.Fprintf(b, "\n### Update from %s\n\n", pt.From)
+		writePackages(b, pt.Packages)
 	}
 	if v.Sophon != nil {
 		if v.HasZip() {
@@ -175,21 +82,28 @@ func writeVersion(b *strings.Builder, v *store.Version, live, pre string) {
 	}
 }
 
-func dates(v *store.Version, isLive bool) string {
+// status is the line under a version heading: what the daily API checks
+// saw. The heading itself stays the bare version, so its anchor never moves.
+func status(v *store.Version, p *page) string {
 	var parts []string
 	switch {
-	case v.MainFirstSeen != "" && isLive:
-		parts = append(parts, "live version since "+v.MainFirstSeen)
+	case v == p.Live:
+		parts = append(parts, "**Live version** in the API since "+v.MainFirstSeen)
 	case v.MainFirstSeen != "":
-		parts = append(parts, "live version from "+v.MainFirstSeen+" to "+v.MainLastSeen)
+		parts = append(parts, "**Live version** in the API from "+v.MainFirstSeen+" to "+v.MainLastSeen)
 	}
-	if v.PreDownloadFirstSeen != "" {
+	switch {
+	case v == p.Pre:
+		parts = append(parts, "**Pre-download** in the API since "+v.PreDownloadFirstSeen)
+	case v.PreDownloadFirstSeen != "" && len(parts) == 0:
+		parts = append(parts, "**Pre-download** in the API from "+v.PreDownloadFirstSeen+" to "+v.PreDownloadLastSeen)
+	case v.PreDownloadFirstSeen != "":
 		parts = append(parts, "pre-download from "+v.PreDownloadFirstSeen)
 	}
 	if len(parts) == 0 {
-		return ""
+		return "No daily API check saw this version as live or pre-download."
 	}
-	return "Seen in the API as the " + strings.Join(parts, ", ") + " (UTC)."
+	return strings.Join(parts, "; ") + " (UTC)."
 }
 
 func writePackages(b *strings.Builder, ps []*store.Package) {
@@ -203,7 +117,7 @@ func writePackages(b *strings.Builder, ps []*store.Package) {
 	for _, p := range ps {
 		name := path.Base(p.URL)
 		link := fmt.Sprintf("[%s](%s)", name, escapeURL(p.URL))
-		if p.HTTPStatus != 0 && p.HTTPStatus != 200 {
+		if dead(p) {
 			link += fmt.Sprintf(" (dead link, HTTP %d)", p.HTTPStatus)
 		}
 		md5 := ""
@@ -216,6 +130,9 @@ func writePackages(b *strings.Builder, ps []*store.Package) {
 		fmt.Fprintf(b, "| %s | %s | %s | %s |\n", link, content(p, parts), size(p.Size), md5)
 	}
 }
+
+// dead reports whether the last link check got an answer other than 200.
+func dead(p *store.Package) bool { return p.HTTPStatus != 0 && p.HTTPStatus != 200 }
 
 func content(p *store.Package, parts int) string {
 	switch p.Kind {
@@ -249,7 +166,7 @@ func category(field string) string {
 
 func writeSophon(b *strings.Builder, v *store.Version) {
 	sb := v.Sophon
-	fmt.Fprintf(b, "#### Sophon full build `%s`\n\n", sb.BuildID)
+	fmt.Fprintf(b, "### Sophon full build `%s`\n\n", sb.BuildID)
 	b.WriteString("| Content | Download | Installed | Files | Chunks | Manifest |\n| --- | --- | --- | --- | --- | --- |\n")
 	prefixes := map[string]bool{}
 	for _, m := range sb.Manifests {
@@ -277,7 +194,7 @@ func writeSophon(b *strings.Builder, v *store.Version) {
 		return
 	}
 	sp := v.SophonPatch
-	fmt.Fprintf(b, "\n#### Sophon update `%s` (from %s)\n\n", sp.PatchID, strings.Join(sp.DiffTags, ", "))
+	fmt.Fprintf(b, "\n### Sophon update `%s` (from %s)\n\n", sp.PatchID, strings.Join(sp.DiffTags, ", "))
 	b.WriteString("| Content |")
 	for _, from := range sp.DiffTags {
 		fmt.Fprintf(b, " From %s |", from)
@@ -318,19 +235,4 @@ func size(n int64) string {
 	default:
 		return fmt.Sprintf("%.2f KiB", float64(n)/1024)
 	}
-}
-
-func writeFooter(b *strings.Builder, s *store.Store) {
-	fmt.Fprintf(b, `
-## License
-
-The code (the Go fetcher and generator) is licensed under the [Apache License 2.0](LICENSE).
-The data in [data/](data/) and the content of this README are licensed under
-[CC BY-NC-SA 4.0](LICENSE-DATA), the license of the upstream lists they build on.
-
----
-
-Last checked: %s (UTC). This file is generated from
-[data/versions.json](data/versions.json) by `+"`go run ./cmd/fetch`"+`; do not edit it by hand.
-`, s.LatestDate())
 }

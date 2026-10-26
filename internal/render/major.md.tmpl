@@ -1,0 +1,16 @@
+# Genshin Impact {{ .M.N }}.x
+
+[← All versions](../../README.md#versions) · [Download guide](../download-guide.md) · [Sophon](../sophon.md) · [Data format](../data.md)
+
+{{ .M.Range }}, newest first.
+
+"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
+not the release date. The checks cover {{ .P.Coverage }};
+`—` means no check saw the version.
+
+{{ versionIndex .M "" }}
+{{ detail .P .M }}
+---
+
+Last checked: {{ .P.Date }} (UTC). Generated from [data/versions.json](../../data/versions.json)
+by `go run ./cmd/fetch`; do not edit by hand. Data license: [CC BY-NC-SA 4.0](../../LICENSE-DATA).
