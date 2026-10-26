@@ -124,21 +124,26 @@ func TestReadmeOrderAndSize(t *testing.T) {
 		t.Error("README does not end with exactly one newline after the footer")
 	}
 
-	if f := realData(t); len(f["README.md"]) >= 20_000 {
-		t.Errorf("README is %d bytes, want < 20000", len(f["README.md"]))
+	// The daily job runs these tests before fetching, so the real-data budget
+	// leaves room for decades of new versions (about 150 bytes each) and
+	// only catches detail tables leaking back into the README.
+	if f := realData(t); len(f["README.md"]) >= 60_000 {
+		t.Errorf("README is %d bytes, want < 60000", len(f["README.md"]))
 	}
 }
 
 func TestReadmeLatest(t *testing.T) {
 	out := render(t, sample())["README.md"]
 	for _, want := range []string{
+		"| Channel | Version | Live in API (UTC) | Links |",
 		"| Live | **7.1.0** | since 2026-10-26 | [Sophon build and update](docs/versions/7.x.md#710) |",
 		"| Pre-download | **7.2.0** | pre-download since 2026-10-26 | [Sophon build](docs/versions/7.x.md#720) |",
 		"| Newest zip archives | **5.0.1** | — | [Download links](docs/versions/5.x.md#501) |",
 		"Every version, by major: [7.x](docs/versions/7.x.md) · [6.x](docs/versions/6.x.md) · [5.x](docs/versions/5.x.md) · [4.x](docs/versions/4.x.md)\n",
 		"- **5.0.1 and earlier:**",
 		"- **After 5.0.1:**",
-		"The checks cover 2024-07-18 to 2024-08-28, and every day since 2026-10-26;",
+		"The checks cover 2024-07-18 to 2024-08-28, and since 2026-10-26;",
+		"or an unknown size.\n\nEvery version, by major:",
 		"![Live 7.1.0](https://img.shields.io/badge/live-7.1.0-blue)",
 		"JRSKelvin/Genshin-Repository-List",
 		"rapdodge/GenshinRepository",
@@ -303,7 +308,9 @@ func TestMajorPageContent(t *testing.T) {
 			"| Game | 2.00 GiB | 3.00 GiB | 7 | 9 | [manifest](https://example.invalid/manifests/B/manifest_game) |",
 			"Chunk URL prefix: `https://example.invalid/chunks/B`",
 			"### Sophon update `P` (from 7.0.0, 6.7.0)",
-			"| Content | From 7.0.0 | From 6.7.0 | Manifest | Diff URL prefix |",
+			"| Content | From 7.0.0 | From 6.7.0 | Manifest | Diff ID |",
+			"| `10016` |\n",
+			"Diff URL prefix: `https://example.invalid/diffs/P/<diff ID>`",
 			"| Game | 1.00 GiB | 2.00 GiB |",
 			"Last checked: 2026-10-26 (UTC)",
 		},
@@ -375,5 +382,24 @@ func TestWriteRemovesStale(t *testing.T) {
 func TestRenderDeterministic(t *testing.T) {
 	if !maps.Equal(render(t, sample()), render(t, sample())) {
 		t.Error("two renders of the same data differ")
+	}
+}
+
+func TestDiffDir(t *testing.T) {
+	m := func(prefix, suffix string) *store.SophonManifest {
+		return &store.SophonManifest{DataURLPrefix: prefix, DataURLSuffix: suffix}
+	}
+	for _, tc := range []struct {
+		ms   []*store.SophonManifest
+		want string
+	}{
+		{[]*store.SophonManifest{m("https://x/d/P/1", ""), m("https://x/d/P/2", "")}, "https://x/d/P"},
+		{[]*store.SophonManifest{m("https://x/d/P/1", ""), m("https://x/d/Q/2", "")}, ""},
+		{[]*store.SophonManifest{m("https://x/d/P/1", "?s")}, ""},
+		{[]*store.SophonManifest{m("https://x/d/P/", "")}, ""},
+	} {
+		if got := diffDir(tc.ms); got != tc.want {
+			t.Errorf("diffDir = %q, want %q", got, tc.want)
+		}
 	}
 }

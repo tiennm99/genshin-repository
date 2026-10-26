@@ -16,10 +16,13 @@ files, and HoYoverse does not endorse it.
 
 ## Latest
 
-| | Version | Live in API (UTC) | Links |
+| Channel | Version | Live in API (UTC) | Links |
 | --- | --- | --- | --- |
 {{ range .Latest }}| {{ .Label }} | {{ .Version }} | {{ .Dates }} | {{ .Link }} |
 {{ end }}
+
+{{ template "legend" . }}
+
 Every version, by major:
 {{- range $i, $m := .Majors }}{{ if $i }} ·{{ end }} [{{ $m.N }}.x]({{ $m.Path }}){{ end }}
 
@@ -37,9 +40,7 @@ Every version, by major:
 Newest first. Expand a major version for its index; each version links to its full
 tables (file links, MD5s, Sophon manifests) on that major's page.
 
-"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
-not the release date. The checks cover {{ .Coverage }};
-`—` means no check saw the version.
+Columns are explained under [Latest](#latest).
 {{ range .Majors }}
 <details>
 <summary><b>Version {{ .N }}.x</b>: {{ .Range }} · <a href="{{ .Path }}">full page</a></summary>
@@ -80,3 +81,9 @@ Code (the Go fetcher and generator): [Apache License 2.0](LICENSE). The data in
 
 Last checked: {{ .Date }} (UTC). Generated from [data/versions.json](data/versions.json) by
 `go run ./cmd/fetch`; do not edit by hand.
+{{- define "legend" -}}
+"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
+not the release date. The checks cover {{ .Coverage }};
+`—` means no check saw the version. "Game zip" and "Sophon" are the download size of the
+game data alone (voice packs are extra); `—` there means no archive or an unknown size.
+{{- end -}}

@@ -293,7 +293,7 @@ func deadNotes(v *store.Version) []string {
 }
 
 // coverage describes the date ranges in which daily checks saw a live
-// version, such as "2023-03-17 to 2025-05-06 and since 2026-10-26". A gap of
+// version, such as "2023-03-17 to 2025-05-06, and since 2026-10-26". A gap of
 // more than one day between two live versions splits the ranges.
 func coverage(s *store.Store, latest string) string {
 	type span struct{ from, to string }
@@ -311,7 +311,7 @@ func coverage(s *store.Store, latest string) string {
 	var parts []string
 	for _, sp := range spans {
 		if sp.to == latest {
-			parts = append(parts, "every day since "+sp.from)
+			parts = append(parts, "since "+sp.from)
 		} else {
 			parts = append(parts, sp.from+" to "+sp.to)
 		}

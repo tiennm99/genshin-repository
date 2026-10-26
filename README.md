@@ -14,11 +14,16 @@ files, and HoYoverse does not endorse it.
 
 ## Latest
 
-| | Version | Live in API (UTC) | Links |
+| Channel | Version | Live in API (UTC) | Links |
 | --- | --- | --- | --- |
 | Live | **7.1.0** | since 2026-10-26 | [Sophon build and update](docs/versions/7.x.md#710) |
 | Pre-download | none | — | — |
 | Newest zip archives | **5.5.0** | 2025-03-26 → 2025-05-06 | [Download links](docs/versions/5.x.md#550) |
+
+"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
+not the release date. The checks cover 2023-03-17 to 2025-05-06, and since 2026-10-26;
+`—` means no check saw the version. "Game zip" and "Sophon" are the download size of the
+game data alone (voice packs are extra); `—` there means no archive or an unknown size.
 
 Every version, by major: [7.x](docs/versions/7.x.md) · [6.x](docs/versions/6.x.md) · [5.x](docs/versions/5.x.md) · [4.x](docs/versions/4.x.md) · [3.x](docs/versions/3.x.md) · [2.x](docs/versions/2.x.md) · [1.x](docs/versions/1.x.md)
 
@@ -34,9 +39,7 @@ Every version, by major: [7.x](docs/versions/7.x.md) · [6.x](docs/versions/6.x.
 Newest first. Expand a major version for its index; each version links to its full
 tables (file links, MD5s, Sophon manifests) on that major's page.
 
-"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
-not the release date. The checks cover 2023-03-17 to 2025-05-06, and every day since 2026-10-26;
-`—` means no check saw the version.
+Columns are explained under [Latest](#latest).
 
 <details>
 <summary><b>Version 7.x</b>: 7.0.0 to 7.1.0 (2 versions) · <a href="docs/versions/7.x.md">full page</a></summary>

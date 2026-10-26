@@ -4,9 +4,7 @@
 
 {{ .M.Range }}, newest first.
 
-"Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
-not the release date. The checks cover {{ .P.Coverage }};
-`—` means no check saw the version.
+{{ template "legend" .P }}
 
 {{ versionIndex .M "" }}
 {{ detail .P .M }}

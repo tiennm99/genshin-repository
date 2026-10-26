@@ -199,7 +199,12 @@ func writeSophon(b *strings.Builder, v *store.Version) {
 	for _, from := range sp.DiffTags {
 		fmt.Fprintf(b, " From %s |", from)
 	}
-	b.WriteString(" Manifest | Diff URL prefix |\n|" + strings.Repeat(" --- |", len(sp.DiffTags)+3) + "\n")
+	dir := diffDir(sp.Manifests)
+	col := "Diff URL prefix"
+	if dir != "" {
+		col = "Diff ID"
+	}
+	b.WriteString(" Manifest | " + col + " |\n|" + strings.Repeat(" --- |", len(sp.DiffTags)+3) + "\n")
 	for _, m := range sp.Manifests {
 		fmt.Fprintf(b, "| %s |", category(m.MatchingField))
 		for _, from := range sp.DiffTags {
@@ -209,9 +214,35 @@ func writeSophon(b *strings.Builder, v *store.Version) {
 				b.WriteString(" - |")
 			}
 		}
-		fmt.Fprintf(b, " [manifest](%s) | `%s%s` |\n", escapeURL(m.ManifestURL()), m.DataURLPrefix, m.DataURLSuffix)
+		diff := m.DataURLPrefix + m.DataURLSuffix
+		if dir != "" {
+			diff = strings.TrimPrefix(diff, dir+"/")
+		}
+		fmt.Fprintf(b, " [manifest](%s) | `%s` |\n", escapeURL(m.ManifestURL()), diff)
+	}
+	if dir != "" {
+		fmt.Fprintf(b, "\nDiff URL prefix: `%s/<diff ID>`\n", dir)
 	}
 	b.WriteString("\nSizes are the download size of the diff data for each starting version.\n")
+}
+
+// diffDir is the directory every diff URL prefix of ms sits in, so the table
+// can show only the trailing ID. It is "" when the prefixes differ in more
+// than their last segment or carry a suffix.
+func diffDir(ms []*store.SophonManifest) string {
+	dir := ""
+	for _, m := range ms {
+		i := strings.LastIndexByte(m.DataURLPrefix, '/')
+		if m.DataURLSuffix != "" || i < 0 || i == len(m.DataURLPrefix)-1 {
+			return ""
+		}
+		if d := m.DataURLPrefix[:i]; dir == "" {
+			dir = d
+		} else if d != dir {
+			return ""
+		}
+	}
+	return dir
 }
 
 // escapeURL keeps parentheses in file names such as Audio_English(US) from
