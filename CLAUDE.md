@@ -7,7 +7,7 @@ daily and regenerates `README.md`.
 ## Commands
 
 - `go run ./cmd/fetch`: query the API, merge into `data/versions.json`, regenerate `README.md`
-- `go run ./cmd/fetch -backfill`: also probe Sophon builds for older `X.Y.0` tags from 5.6.0
+- `go run ./cmd/fetch -backfill`: also probe Sophon builds for every older `X.Y.0` tag and recorded version
 - `go run ./cmd/fetch -render-only`: regenerate `README.md` without the network
 - `go run ./cmd/seed`: one-off import of the upstream history at pinned commits (merges, never removes)
 - Checks: `go vet ./...`, `golangci-lint run`, `go test ./...`, `CGO_ENABLED=0 go build ./...`

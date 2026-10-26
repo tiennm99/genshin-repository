@@ -239,8 +239,9 @@ func TestAPIError(t *testing.T) {
 }
 
 func TestCandidateTags(t *testing.T) {
-	got := candidateTags("6.2.0")
-	want := []string{"5.6.0", "5.7.0", "5.8.0", "5.9.0", "6.0.0", "6.1.0"}
+	s := &store.Store{Versions: []*store.Version{{Version: "1.3.2"}, {Version: "6.0.0"}, {Version: "6.2.0"}}}
+	got := candidateTags("2.1.0", s)
+	want := []string{"1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.3.2", "1.4.0", "1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "2.0.0"}
 	if !slices.Equal(got, want) {
 		t.Errorf("got %v, want %v", got, want)
 	}

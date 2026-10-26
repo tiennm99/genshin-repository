@@ -9,16 +9,13 @@ import (
 	"github.com/tiennm99/genshin-repository/internal/store"
 )
 
-// FirstSophonOnly is the first version shipped only through Sophon; from it
-// on getGamePackages no longer lists zip archives.
-const FirstSophonOnly = "5.6.0"
-
 // Options controls one Sync run.
 type Options struct {
 	// Date is the observation date (YYYY-MM-DD, UTC) recorded as seen.
 	Date string
-	// Backfill probes getBuild for every X.Y.0 tag from FirstSophonOnly to
-	// the live version that has no Sophon build yet.
+	// Backfill probes getBuild for every X.Y.0 tag below the live version,
+	// and every recorded version, that has no Sophon build yet. The Sophon
+	// API also serves some zip-era versions.
 	Backfill bool
 	// Logf receives progress lines; nil discards them.
 	Logf func(format string, args ...any)
@@ -65,7 +62,7 @@ func Sync(ctx context.Context, c *Client, s *store.Store, o Options) error {
 
 	tags := slices.Clone(br.Main.DiffTags)
 	if o.Backfill {
-		tags = append(tags, candidateTags(br.Main.Tag)...)
+		tags = append(tags, candidateTags(br.Main.Tag, s)...)
 	}
 	for _, tag := range tags {
 		if err := backfill(ctx, c, s, br.Main, tag, logf); err != nil {
@@ -135,19 +132,20 @@ func backfill(ctx context.Context, c *Client, s *store.Store, b *Branch, tag str
 	return nil
 }
 
-// candidateTags lists X.Y.0 from FirstSophonOnly up to (not including) live.
-func candidateTags(live string) []string {
-	first := store.NormalizeVersion(FirstSophonOnly)
+// candidateTags lists X.Y.0 from 1.0.0 and every version recorded in s,
+// ascending and below live.
+func candidateTags(live string, s *store.Store) []string {
 	maxMajor, _ := strconv.Atoi(store.Major(live))
-	minMajor, _ := strconv.Atoi(store.Major(first))
 	var out []string
-	for m := minMajor; m <= maxMajor; m++ {
+	for m := 1; m <= maxMajor; m++ {
 		for n := range 10 {
-			t := fmt.Sprintf("%d.%d.0", m, n)
-			if store.CompareVersions(t, first) >= 0 && store.CompareVersions(t, live) < 0 {
-				out = append(out, t)
-			}
+			out = append(out, fmt.Sprintf("%d.%d.0", m, n))
 		}
 	}
-	return out
+	for _, v := range s.Versions {
+		out = append(out, v.Version)
+	}
+	out = slices.DeleteFunc(out, func(t string) bool { return store.CompareVersions(t, live) >= 0 })
+	slices.SortFunc(out, store.CompareVersions)
+	return slices.Compact(out)
 }

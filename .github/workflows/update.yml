@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       backfill:
-        description: Probe older Sophon builds (5.6.0 and later) that are missing
+        description: Probe Sophon builds of all older versions that are missing
         type: boolean
         default: false
 

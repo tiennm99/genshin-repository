@@ -2,7 +2,7 @@
 // data/versions.json and regenerates README.md.
 //
 //	go run ./cmd/fetch               daily update
-//	go run ./cmd/fetch -backfill     also probe older Sophon builds (5.6.0 on)
+//	go run ./cmd/fetch -backfill     also probe Sophon builds of all older versions
 //	go run ./cmd/fetch -render-only  only regenerate README.md
 package main
 
@@ -23,7 +23,7 @@ import (
 func main() {
 	dataPath := flag.String("data", "data/versions.json", "version store")
 	readmePath := flag.String("readme", "README.md", "README to generate")
-	backfill := flag.Bool("backfill", false, "probe getBuild for X.Y.0 tags from 5.6.0 that lack Sophon data")
+	backfill := flag.Bool("backfill", false, "probe getBuild for older X.Y.0 tags and recorded versions that lack Sophon data")
 	renderOnly := flag.Bool("render-only", false, "skip the API and only regenerate the README")
 	date := flag.String("date", time.Now().UTC().Format(time.DateOnly), "observation date (UTC, YYYY-MM-DD)")
 	flag.Parse()
