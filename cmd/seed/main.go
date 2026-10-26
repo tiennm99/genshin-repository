@@ -17,6 +17,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/tiennm99/genshin-repository/internal/linkcheck"
 	"github.com/tiennm99/genshin-repository/internal/render"
 	"github.com/tiennm99/genshin-repository/internal/store"
 	"github.com/tiennm99/genshin-repository/internal/upstream"
@@ -61,7 +62,7 @@ func run(ctx context.Context, dataPath, out string, checkLinks bool, workers int
 	log.Printf("%s: snapshots per format %v", upstream.RepoSnapshots, counts)
 
 	if checkLinks {
-		live, dead, unknown := upstream.CheckLinks(ctx, &http.Client{Timeout: 30 * time.Second}, s, workers)
+		live, dead, unknown := linkcheck.Check(ctx, &http.Client{Timeout: 30 * time.Second}, s, workers)
 		log.Printf("link check: %d live, %d dead, %d unknown (status kept)", live, dead, unknown)
 	}
 	if err := s.Save(dataPath); err != nil {

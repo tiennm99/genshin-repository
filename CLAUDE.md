@@ -6,7 +6,7 @@ daily and regenerates `README.md` and `docs/versions/`.
 
 ## Commands
 
-- `go run ./cmd/fetch`: query the API, merge into `data/versions.json`, regenerate `README.md` and `docs/versions/`
+- `go run ./cmd/fetch`: query the API, re-check every archive link, merge into `data/versions.json`, regenerate `README.md` and `docs/versions/`; `-check-links=false` skips the link check
 - `go run ./cmd/fetch -backfill`: also probe Sophon builds for every older `X.Y.0` tag and recorded version
 - `go run ./cmd/fetch -render-only`: regenerate `README.md` and `docs/versions/` without the network; `-out DIR` writes them under another root
 - `go run ./cmd/seed`: one-off import of the upstream history at pinned commits (merges, never removes)
@@ -16,7 +16,8 @@ daily and regenerates `README.md` and `docs/versions/`.
 
 - `internal/store`: data model, merge rules, canonical JSON
 - `internal/hoyo`: API client (getGamePackages, getGameBranches, getBuild, POST getPatchBuild) and `Sync`
-- `internal/upstream`: parser for JRSKelvin's Markdown lists and API snapshots; HEAD link check
+- `internal/upstream`: parser for JRSKelvin's Markdown lists and API snapshots
+- `internal/linkcheck`: HEAD check of every archive link, run by `fetch` daily and by `seed`
 - `internal/render`: README and `docs/versions/<N>.x.md` renderer; page shells in `*.md.tmpl`, tables in `tables.go`
 - `docs/download-guide.md`, `docs/sophon.md`, `docs/data.md`: hand-written guides (no store data)
 - `.github/workflows/update.yml`: daily fetch and bot commit; `ci.yml`: vet, lint, test, build, generated-files sync

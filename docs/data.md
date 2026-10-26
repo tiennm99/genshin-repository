@@ -52,7 +52,7 @@ Optional fields are left out when empty.
 | `md5` | string | Lower-case MD5 as published by the API or upstream list |
 | `size` | int | Download size in bytes (the served `Content-Length` when known) |
 | `decompressed_size` | int | Unpacked size in bytes |
-| `http_status` | int | Answer of the last link check; absent if never checked; anything but 200 is a dead link |
+| `http_status` | int | Answer of the last link check (run daily); absent if never checked; anything but 200 is a dead link. Only 200, 404 and 410 are recorded: other answers, such as the occasional 400 the CDN gives for large archives, keep the previous status |
 | `md5_size` | int | Size the MD5 was published for, set only when it differs from `size`: the MD5 then likely describes another upload |
 
 ## Patch
