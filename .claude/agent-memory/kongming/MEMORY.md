@@ -1,0 +1,1 @@
+- [README layout preference](feedback-readme-layout.md) — links/latest on top, credits last, detail split into docs/, few README entries
