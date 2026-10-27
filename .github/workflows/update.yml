@@ -2,7 +2,9 @@ name: Update
 
 on:
   schedule:
-    - cron: '30 1 * * *'
+    # Version updates go live after maintenance from 06:00 to about 11:00
+    # UTC+8 (22:00-03:00 UTC), so run one hour after it ends: 04:00 UTC.
+    - cron: '0 4 * * *'
   workflow_dispatch:
     inputs:
       backfill:
