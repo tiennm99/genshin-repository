@@ -3,7 +3,7 @@
 [![Update](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml/badge.svg)](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml)
 ![Live 7.1.0](https://img.shields.io/badge/live-7.1.0-blue)
 ![53 versions](https://img.shields.io/badge/versions-53-informational)
-![Last checked 2026-10-26](https://img.shields.io/badge/last%20checked-2026--10--26-success)
+![Last checked 2026-10-28](https://img.shields.io/badge/last%20checked-2026--10--28-success)
 [![Data license CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE-DATA)
 
 Direct download links and Sophon build data for every Genshin Impact version on the
@@ -181,5 +181,5 @@ Code (the Go fetcher and generator): [Apache License 2.0](LICENSE). The data in
 
 ---
 
-Last checked: 2026-10-26 (UTC). Generated from [data/versions.json](data/versions.json) by
+Last checked: 2026-10-28 (UTC). Generated from [data/versions.json](data/versions.json) by
 `go run ./cmd/fetch`; do not edit by hand.
