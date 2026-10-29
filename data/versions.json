@@ -1691,31 +1691,36 @@
         {
           "kind": "game",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/GenshinImpact_3.2.0.zip",
-          "http_status": 404
+          "size": 43486495057,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "zh-cn",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/Audio_Chinese_3.2.0.zip",
-          "http_status": 404
+          "size": 7563404448,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "en-us",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/Audio_English(US)_3.2.0.zip",
-          "http_status": 404
+          "size": 8636049015,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "ja-jp",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/Audio_Japanese_3.2.0.zip",
-          "http_status": 404
+          "size": 9600817791,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "ko-kr",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20221024103618_h2e3o3zijYKEqHnQ/Audio_Korean_3.2.0.zip",
-          "http_status": 404
+          "size": 7416460811,
+          "http_status": 200
         }
       ],
       "patches": [
@@ -1725,7 +1730,8 @@
             {
               "kind": "game",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/game_3.1.0_3.2.0_hdiff_3B7InFiY1SDdN8Lv.zip",
-              "http_status": 404
+              "size": 6990114659,
+              "http_status": 200
             },
             {
               "kind": "audio",
@@ -1763,7 +1769,8 @@
             {
               "kind": "game",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/game_3.0.0_3.2.0_hdiff_0XM45IeyvRhgYCLj.zip",
-              "http_status": 404
+              "size": 10088027162,
+              "http_status": 200
             },
             {
               "kind": "audio",
@@ -1934,25 +1941,29 @@
           "kind": "audio",
           "language": "zh-cn",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230109135018_10QhExKHwAoa4ecr/Audio_Chinese_3.4.0.zip",
-          "http_status": 404
+          "size": 8498669649,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "en-us",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230109135018_10QhExKHwAoa4ecr/Audio_English(US)_3.4.0.zip",
-          "http_status": 404
+          "size": 9702153272,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "ja-jp",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230109135018_10QhExKHwAoa4ecr/Audio_Japanese_3.4.0.zip",
-          "http_status": 404
+          "size": 10879249141,
+          "http_status": 200
         },
         {
           "kind": "audio",
           "language": "ko-kr",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230109135018_10QhExKHwAoa4ecr/Audio_Korean_3.4.0.zip",
-          "http_status": 404
+          "size": 8329639822,
+          "http_status": 200
         }
       ],
       "patches": [
@@ -1962,7 +1973,8 @@
             {
               "kind": "game",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/game_3.3.0_3.4.0_hdiff_IxKGMXhCLzZAJqUm.zip",
-              "http_status": 404
+              "size": 7001736910,
+              "http_status": 200
             },
             {
               "kind": "audio",
@@ -2000,7 +2012,8 @@
             {
               "kind": "game",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/game_3.2.0_3.4.0_hdiff_2Tv5e1BCLFnW0dPG.zip",
-              "http_status": 404
+              "size": 9037600451,
+              "http_status": 200
             },
             {
               "kind": "audio",
@@ -8249,7 +8262,7 @@
         "api-sophon"
       ],
       "main_first_seen": "2026-10-26",
-      "main_last_seen": "2026-10-28",
+      "main_last_seen": "2026-10-29",
       "sophon": {
         "build_id": "sMXGW2ll3Fuu",
         "manifests": [

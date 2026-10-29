@@ -3,7 +3,7 @@
 [![Update](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml/badge.svg)](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml)
 ![Live 7.1.0](https://img.shields.io/badge/live-7.1.0-blue)
 ![53 versions](https://img.shields.io/badge/versions-53-informational)
-![Last checked 2026-10-28](https://img.shields.io/badge/last%20checked-2026--10--28-success)
+![Last checked 2026-10-29](https://img.shields.io/badge/last%20checked-2026--10--29-success)
 [![Data license CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE-DATA)
 
 Direct download links and Sophon build data for every Genshin Impact version on the
@@ -111,9 +111,9 @@ Columns are explained under [Latest](#latest).
 | [3.7.0](docs/versions/3.x.md#370) | 2023-05-24 → 2023-07-04 | 47.54 GiB | — | MD5 may not match |
 | [3.6.0](docs/versions/3.x.md#360) | 2023-04-12 → 2023-05-23 | 46.56 GiB | — | MD5 may not match |
 | [3.5.0](docs/versions/3.x.md#350) | 2023-03-17 → 2023-04-11 | 43.61 GiB | — | MD5 may not match |
-| [3.4.0](docs/versions/3.x.md#340) | — | — | — | full install dead, 2 dead update links |
+| [3.4.0](docs/versions/3.x.md#340) | — | — | — | 1 dead link |
 | [3.3.0](docs/versions/3.x.md#330) | — | 42.50 GiB | — |  |
-| [3.2.0](docs/versions/3.x.md#320) | — | — | — | full install dead, 2 dead update links |
+| [3.2.0](docs/versions/3.x.md#320) | — | 40.50 GiB | — |  |
 | [3.1.0](docs/versions/3.x.md#310) | — | 37.89 GiB | — |  |
 | [3.0.0](docs/versions/3.x.md#300) | — | 34.46 GiB | — |  |
 
@@ -181,5 +181,5 @@ Code (the Go fetcher and generator): [Apache License 2.0](LICENSE). The data in
 
 ---
 
-Last checked: 2026-10-28 (UTC). Generated from [data/versions.json](data/versions.json) by
+Last checked: 2026-10-29 (UTC). Generated from [data/versions.json](data/versions.json) by
 `go run ./cmd/fetch`; do not edit by hand.
