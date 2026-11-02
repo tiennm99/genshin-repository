@@ -3,8 +3,10 @@ name: Update
 on:
   schedule:
     # Version updates go live after maintenance from 06:00 to about 11:00
-    # UTC+8 (22:00-03:00 UTC), so run one hour after it ends: 04:00 UTC.
-    - cron: '0 4 * * *'
+    # UTC+8 (22:00-03:00 UTC). GitHub starts scheduled runs hours late: in
+    # October 2026 a 00:00 UTC cron started between 03:14 and 05:58 UTC, just
+    # after maintenance ends. Later crons slipped further, to 10:00-12:00 UTC.
+    - cron: '0 0 * * *'
   workflow_dispatch:
     inputs:
       backfill:
