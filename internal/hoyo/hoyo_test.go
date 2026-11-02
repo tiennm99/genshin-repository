@@ -116,7 +116,8 @@ func TestApplyBranchZip(t *testing.T) {
 }
 
 // fakeAPI serves the fixtures. getPatchBuild answers only POST, like the
-// real endpoint; unknown getBuild tags answer retcode -202.
+// real endpoint; unknown getBuild tags answer retcode -202, and so does a
+// tagged getBuild on the predownload branch.
 func fakeAPI(t *testing.T, branches []byte) *Client {
 	t.Helper()
 	builds := map[string][]byte{
@@ -140,8 +141,9 @@ func fakeAPI(t *testing.T, branches []byte) *Client {
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 			return
 		}
-		b, ok := builds[r.URL.Query().Get("tag")]
-		if !ok {
+		q := r.URL.Query()
+		b, ok := builds[q.Get("tag")]
+		if !ok || (q.Get("branch") == "predownload" && q.Get("tag") != "") {
 			_, _ = w.Write([]byte(`{"retcode":-202,"message":"not found","data":null}`))
 			return
 		}

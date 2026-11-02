@@ -73,9 +73,19 @@ func Sync(ctx context.Context, c *Client, s *store.Store, o Options) error {
 }
 
 func syncBranch(ctx context.Context, c *Client, s *store.Store, b *Branch, pre bool, date string, logf func(string, ...any)) error {
-	build, err := c.GetBuild(ctx, b, b.Tag)
+	// getBuild answers not found for the predownload branch's own tag; it
+	// serves that build only untagged, so check the answer's tag instead.
+	tag := b.Tag
+	if pre {
+		tag = ""
+	}
+	build, err := c.GetBuild(ctx, b, tag)
 	if err != nil {
 		return err
+	}
+	if store.NormalizeVersion(build.Tag) != store.NormalizeVersion(b.Tag) {
+		logf("sophon %s: build tag %s != %s, ignored", b.Branch, build.Tag, b.Tag)
+		return nil
 	}
 	v := s.Get(b.Tag)
 	v.AddSource(store.SourceSophonAPI)
