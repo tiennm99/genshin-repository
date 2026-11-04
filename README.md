@@ -1,13 +1,13 @@
 # Genshin Impact Repository
 
 [![Update](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml/badge.svg)](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml)
-![Live 7.1.0](https://img.shields.io/badge/live-7.1.0-blue)
+![Live 7.2.0](https://img.shields.io/badge/live-7.2.0-blue)
 ![54 versions](https://img.shields.io/badge/versions-54-informational)
-![Last checked 2026-11-03](https://img.shields.io/badge/last%20checked-2026--11--03-success)
+![Last checked 2026-11-04](https://img.shields.io/badge/last%20checked-2026--11--04-success)
 [![Data license CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE-DATA)
 
 Direct download links and Sophon build data for every Genshin Impact version on the
-global PC client, from 1.3.0 to 7.1.0. A GitHub Actions job checks the official
+global PC client, from 1.3.0 to 7.2.0. A GitHub Actions job checks the official
 HoYoverse API every day and keeps this list and [data/versions.json](data/versions.json)
 current. Every link points to HoYoverse's own servers; this repository hosts no game
 files, and HoYoverse does not endorse it.
@@ -16,8 +16,8 @@ files, and HoYoverse does not endorse it.
 
 | Channel | Version | Live in API (UTC) | Links |
 | --- | --- | --- | --- |
-| Live | **7.1.0** | since 2026-10-26 | [Sophon build and update](docs/versions/7.x.md#710) |
-| Pre-download | **7.2.0** | pre-download since 2026-11-02 | [Sophon build](docs/versions/7.x.md#720) |
+| Live | **7.2.0** | since 2026-11-04 | [Sophon build and update](docs/versions/7.x.md#720) |
+| Pre-download | none | — | — |
 | Newest zip archives | **5.5.0** | 2025-03-26 → 2025-05-06 | [Download links](docs/versions/5.x.md#550) |
 
 "Live in API" is when daily checks of the HoYoverse API saw the version as live. It is
@@ -46,8 +46,8 @@ Columns are explained under [Latest](#latest).
 
 | Version | Live in API (UTC) | Game zip | Sophon | Notes |
 | --- | --- | --- | --- | --- |
-| [7.2.0](docs/versions/7.x.md#720) | pre-download since 2026-11-02 | — | 122.84 GiB | pre-download |
-| [7.1.0](docs/versions/7.x.md#710) | since 2026-10-26 | — | 119.50 GiB | live |
+| [7.2.0](docs/versions/7.x.md#720) | since 2026-11-04 | — | 122.84 GiB | live |
+| [7.1.0](docs/versions/7.x.md#710) | 2026-10-26 → 2026-11-03 | — | 119.50 GiB |  |
 | [7.0.0](docs/versions/7.x.md#700) | — | — | 112.98 GiB |  |
 
 </details>
@@ -112,9 +112,9 @@ Columns are explained under [Latest](#latest).
 | [3.7.0](docs/versions/3.x.md#370) | 2023-05-24 → 2023-07-04 | 47.54 GiB | — | MD5 may not match |
 | [3.6.0](docs/versions/3.x.md#360) | 2023-04-12 → 2023-05-23 | 46.56 GiB | — | MD5 may not match |
 | [3.5.0](docs/versions/3.x.md#350) | 2023-03-17 → 2023-04-11 | 43.61 GiB | — | MD5 may not match |
-| [3.4.0](docs/versions/3.x.md#340) | — | — | — | full install dead, 2 dead update links |
+| [3.4.0](docs/versions/3.x.md#340) | — | — | — | 1 dead link |
 | [3.3.0](docs/versions/3.x.md#330) | — | 42.50 GiB | — |  |
-| [3.2.0](docs/versions/3.x.md#320) | — | 40.50 GiB | — | full install dead, 2 dead update links |
+| [3.2.0](docs/versions/3.x.md#320) | — | 40.50 GiB | — |  |
 | [3.1.0](docs/versions/3.x.md#310) | — | 37.89 GiB | — |  |
 | [3.0.0](docs/versions/3.x.md#300) | — | 34.46 GiB | — |  |
 
@@ -182,5 +182,5 @@ Code (the Go fetcher and generator): [Apache License 2.0](LICENSE). The data in
 
 ---
 
-Last checked: 2026-11-03 (UTC). Generated from [data/versions.json](data/versions.json) by
+Last checked: 2026-11-04 (UTC). Generated from [data/versions.json](data/versions.json) by
 `go run ./cmd/fetch`; do not edit by hand.
