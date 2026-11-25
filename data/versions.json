@@ -1501,7 +1501,7 @@
               "language": "en-us",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/en-us_2.8.0_3.0.0_hdiff_6yWlQX5NphSDHovf.zip",
               "size": 725191295,
-              "http_status": 200
+              "http_status": 404
             },
             {
               "kind": "audio",
@@ -1515,7 +1515,7 @@
               "language": "ko-kr",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.8.0_3.0.0_hdiff_rckI0qyC8V3xBaep.zip",
               "size": 605387416,
-              "http_status": 200
+              "http_status": 404
             }
           ]
         },
@@ -1676,7 +1676,7 @@
               "language": "ko-kr",
               "url": "https://autopatchhk.yuanshen.com/client_app/update/hk4e_global/10/ko-kr_2.8.0_3.1.0_hdiff_FpEC0r5WxkMgD1cN.zip",
               "size": 1194149977,
-              "http_status": 200
+              "http_status": 404
             }
           ]
         }
@@ -2863,7 +2863,7 @@
           "kind": "game",
           "url": "https://autopatchhk.yuanshen.com/client_app/download/pc_zip/20230804185804_eTmE8EZjJZdAJapq/GenshinImpact_4.0.0.zip",
           "size": 60296000212,
-          "http_status": 200
+          "http_status": 404
         },
         {
           "kind": "game",
@@ -8465,7 +8465,7 @@
         "api-sophon"
       ],
       "main_first_seen": "2026-11-04",
-      "main_last_seen": "2026-11-24",
+      "main_last_seen": "2026-11-25",
       "pre_download_first_seen": "2026-11-02",
       "pre_download_last_seen": "2026-11-03",
       "sophon": {

@@ -3,7 +3,7 @@
 [![Update](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml/badge.svg)](https://github.com/tiennm99/genshin-repository/actions/workflows/update.yml)
 ![Live 7.2.0](https://img.shields.io/badge/live-7.2.0-blue)
 ![54 versions](https://img.shields.io/badge/versions-54-informational)
-![Last checked 2026-11-24](https://img.shields.io/badge/last%20checked-2026--11--24-success)
+![Last checked 2026-11-25](https://img.shields.io/badge/last%20checked-2026--11--25-success)
 [![Data license CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE-DATA)
 
 Direct download links and Sophon build data for every Genshin Impact version on the
@@ -99,7 +99,7 @@ Columns are explained under [Latest](#latest).
 | [4.2.0](docs/versions/4.x.md#420) | 2023-11-08 → 2023-12-19 | 64.92 GiB | 65.06 GiB | 1 dead link |
 | [4.1.0](docs/versions/4.x.md#410) | 2023-09-27 → 2023-11-07 | 60.90 GiB | — | 1 dead link |
 | [4.0.1](docs/versions/4.x.md#401) | 2023-08-23 → 2023-09-26 | 54.99 GiB | — |  |
-| [4.0.0](docs/versions/4.x.md#400) | 2023-08-16 → 2023-08-22 | 54.99 GiB | — |  |
+| [4.0.0](docs/versions/4.x.md#400) | 2023-08-16 → 2023-08-22 | 54.99 GiB | — | 1 dead link |
 
 </details>
 
@@ -115,8 +115,8 @@ Columns are explained under [Latest](#latest).
 | [3.4.0](docs/versions/3.x.md#340) | — | — | — | full install dead, 2 dead update links |
 | [3.3.0](docs/versions/3.x.md#330) | — | 42.50 GiB | — |  |
 | [3.2.0](docs/versions/3.x.md#320) | — | 40.50 GiB | — | full install dead, 2 dead update links |
-| [3.1.0](docs/versions/3.x.md#310) | — | 37.89 GiB | — |  |
-| [3.0.0](docs/versions/3.x.md#300) | — | 34.46 GiB | — |  |
+| [3.1.0](docs/versions/3.x.md#310) | — | 37.89 GiB | — | 1 dead link |
+| [3.0.0](docs/versions/3.x.md#300) | — | 34.46 GiB | — | 2 dead links |
 
 </details>
 
@@ -182,5 +182,5 @@ Code (the Go fetcher and generator): [Apache License 2.0](LICENSE). The data in
 
 ---
 
-Last checked: 2026-11-24 (UTC). Generated from [data/versions.json](data/versions.json) by
+Last checked: 2026-11-25 (UTC). Generated from [data/versions.json](data/versions.json) by
 `go run ./cmd/fetch`; do not edit by hand.
